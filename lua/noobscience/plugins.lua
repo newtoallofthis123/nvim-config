@@ -6,9 +6,10 @@ return require('packer').startup(function(use)
 
     -- For the cool icons
     use 'nvim-tree/nvim-web-devicons'
+
     -- Nvim treesitter for better highlighting
     use {
-        'nvim-treesitter/nvim-treesitter',
+       'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
 
@@ -148,4 +149,15 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
 
     use 'mbbill/undotree'
+
+        -- packer
+        use {
+            'yaocccc/nvim-hl-mdcodeblock.lua',
+            after = 'nvim-treesitter',
+            config = function ()
+                require('hl-mdcodeblock').setup({
+                    -- option
+                })
+            end
+        }
 end)
