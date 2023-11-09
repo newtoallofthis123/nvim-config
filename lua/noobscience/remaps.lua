@@ -74,7 +74,6 @@ vim.keymap.set("n", "<leader>hm", function() mark.go_to_mark(1) end)
 -- Vim Fugitive
 vim.keymap.set("n", "<leader>gs", function() vim.cmd('Git') end)
 vim.keymap.set("n", "<leader>gd", function() vim.cmd('Gdiffsplit') end)
-vim.keymap.set("n", "<leader>gc", function() vim.cmd('Git commit') end)
 vim.keymap.set("n", "<leader>gp", function() vim.cmd('Git push') end)
 vim.keymap.set("n", "<leader>gb", function() vim.cmd('Git blame') end)
 vim.keymap.set("n", "<leader>ga", function() vim.cmd('Git add .') end)
