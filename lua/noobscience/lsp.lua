@@ -15,13 +15,17 @@ require('mason-lspconfig').setup({
         'pyright',
         'eslint',
         'rust_analyzer',
+        'emmet_ls',
         'tsserver',
         'vimls',
+        'templ'
     },
     handlers = {
         lsp_zero.default_setup,
     }
 })
+
+vim.filetype.add({ extension = { templ = "templ" } })
 
 local rust_opts = {
   tools = {
@@ -61,6 +65,21 @@ lspconfig.ocamllsp.setup({
     on_attach = on_attach,
     capabilities = capabilities
 })
+
+lspconfig.tailwindcss.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+    init_options = { userLanguages = { templ = "html" } },
+})
+
+lspconfig.emmet_ls.setup({
+    -- on_attach = on_attach,
+    capabilities = capabilities,
+    filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" , "templ"},
+})
+
+vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = vim.lsp.buf.format })
 
 require('mason-lspconfig').setup_handlers({
     function(server_name)

@@ -9,14 +9,21 @@ return require('packer').startup(function(use)
 
     -- Nvim treesitter for better highlighting
     use {
-       'nvim-treesitter/nvim-treesitter',
+        'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
+
+    use 'nvim-tree/nvim-tree.lua'
 
     -- The telescope
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.4',
         requires = { { 'nvim-lua/plenary.nvim' } }
+    }
+
+    use {
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
     }
 
     -- LSP zero for the LSP config
@@ -71,6 +78,8 @@ return require('packer').startup(function(use)
     use({ 'projekt0n/github-nvim-theme' })
     use 'tanvirtin/monokai.nvim'
     use "olimorris/onedarkpro.nvim"
+    use 'Mofiqul/vscode.nvim'
+    use 'datsfilipe/vesper.nvim'
 
     -- Auto brackets
     use {
@@ -100,25 +109,12 @@ return require('packer').startup(function(use)
             })
         end,
     })
-
-    use({
-        "ms-jpq/chadtree",
-        branch = "chad",
-    })
-
-    use 'adelarsq/vim-devicons-emoji'
+    --
+    -- use 'adelarsq/vim-devicons-emoji'
 
     use({
         'uga-rosa/ccc.nvim',
     })
-
-    use {
-        "startup-nvim/startup.nvim",
-        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
-        config = function()
-            require "startup".setup(require("noobscience.dashboard"))
-        end
-    }
 
     use 'wakatime/vim-wakatime'
     -- Lua
@@ -150,14 +146,14 @@ return require('packer').startup(function(use)
 
     use 'mbbill/undotree'
 
-        -- packer
-        use {
-            'yaocccc/nvim-hl-mdcodeblock.lua',
-            after = 'nvim-treesitter',
-            config = function ()
-                require('hl-mdcodeblock').setup({
-                    -- option
-                })
-            end
-        }
+    -- packer
+    use {
+        'yaocccc/nvim-hl-mdcodeblock.lua',
+        after = 'nvim-treesitter',
+        config = function()
+            require('hl-mdcodeblock').setup({
+                -- option
+            })
+        end
+    }
 end)

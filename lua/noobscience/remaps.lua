@@ -16,7 +16,6 @@ lsp_zero.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-    vim.keymap.set("n", "<leader>uf", function() vim.lsp.buf.formatting() end, { buffer = 0 })
 end)
 
 -- Make new file
@@ -40,7 +39,8 @@ vim.keymap.set('n', '<leader>da', function() vim.cmd('colorscheme monokai_ristre
 vim.o.completeopt = "menuone,noinsert,noselect"
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+vim.keymap.set('n', '<leader>ff', builtin.find_files, {
+})
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
@@ -52,7 +52,7 @@ vim.keymap.set('n', '<leader>fs', function()
     })
 end, {})
 
-vim.keymap.set('n', '<leader>t', function() vim.cmd('CHADopen') end)
+vim.keymap.set('n', '<leader>t', function() vim.cmd('NvimTreeToggle') end)
 
 vim.keymap.set('n', '<leader>C', function() vim.cmd('CccPick') end)
 
@@ -72,7 +72,7 @@ vim.keymap.set("n", "<C-5>", function() ui.nav_file(5) end)
 vim.keymap.set("n", "<leader>hm", function() mark.go_to_mark(1) end)
 
 -- Vim Fugitive
-vim.keymap.set("n", "<leader>gs", function() vim.cmd('Git') end)
+vim.keymap.set("n", "<leader>gg", function() vim.cmd('Git') end)
 vim.keymap.set("n", "<leader>gd", function() vim.cmd('Gdiffsplit') end)
 vim.keymap.set("n", "<leader>gp", function() vim.cmd('Git push') end)
 vim.keymap.set("n", "<leader>gb", function() vim.cmd('Git blame') end)
@@ -83,3 +83,9 @@ vim.keymap.set('n', '<leader>y', vim.cmd.UndotreeToggle)
 
 -- general settings
 vim.keymap.set("n", "<leader>d", function() vim.cmd('bd') end)
+vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
+
+vim.keymap.set("n", "<leader>e", function() vim.cmd(':Ex') end)
+vim.keymap.set("n", "<leader>l", function() vim.cmd('terminal fish') end)
+
+vim.keymap.set("t", "<C-t>", function() vim.cmd('bd!') end)
