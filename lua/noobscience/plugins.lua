@@ -76,11 +76,15 @@ return require('packer').startup(function(use)
 
     -- Fav themes
     use({ 'projekt0n/github-nvim-theme' })
-    use 'tanvirtin/monokai.nvim'
     use "olimorris/onedarkpro.nvim"
     use 'Mofiqul/vscode.nvim'
     use 'datsfilipe/vesper.nvim'
-
+    use {
+        "loctvl842/monokai-pro.nvim",
+        config = function()
+            require("monokai-pro").setup()
+        end
+    }
     -- Auto brackets
     use {
         "windwp/nvim-autopairs",
@@ -106,6 +110,7 @@ return require('packer').startup(function(use)
             require("barbecue").setup({
                 show_basename = false,
                 show_dirname = false,
+                theme = 'monokai-pro',
             })
         end,
     })

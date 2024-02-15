@@ -33,7 +33,7 @@ vim.keymap.set('n', '<C-S>', vim.cmd.w)
 vim.keymap.set('n', '<C-Q>', vim.cmd.qa)
 
 vim.keymap.set('n', '<leader>li', function() vim.cmd('colorscheme github_light') end)
-vim.keymap.set('n', '<leader>da', function() vim.cmd('colorscheme monokai_ristretto') end)
+vim.keymap.set('n', '<leader>da', function() vim.cmd('colorscheme monokai-pro') end)
 
 
 vim.o.completeopt = "menuone,noinsert,noselect"

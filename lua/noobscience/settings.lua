@@ -1,5 +1,4 @@
-vim.cmd.colorscheme('vesper')
-
+vim.cmd.colorscheme('monokai-pro-spectrum')
 vim.opt.termguicolors = true
 
 -- Setup telescope
@@ -96,7 +95,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = format_sync_grp,
 })
 
-require('lualine').setup()
+require('lualine').setup({
+    options = {
+        theme = 'monokai-pro',
+    }
+})
 
 local ccc = require("ccc")
 local mapping = ccc.mapping
