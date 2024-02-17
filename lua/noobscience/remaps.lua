@@ -78,6 +78,19 @@ vim.keymap.set("n", "<leader>gp", function() vim.cmd('Git push') end)
 vim.keymap.set("n", "<leader>gb", function() vim.cmd('Git blame') end)
 vim.keymap.set("n", "<leader>ga", function() vim.cmd('Git add .') end)
 
+-- Todo Comments
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+  require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+vim.keymap.set("n", "]t", function()
+  require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
+end, { desc = "Next error/warning todo comment" })
+
 -- Undotree
 vim.keymap.set('n', '<leader>y', vim.cmd.UndotreeToggle)
 

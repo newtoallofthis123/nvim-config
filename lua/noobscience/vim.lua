@@ -11,6 +11,8 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
+vim.opt.colorcolumn = "80"
+
 vim.cmd("set number")
 vim.cmd("set relativenumber")
 vim.cmd("set autoindent")

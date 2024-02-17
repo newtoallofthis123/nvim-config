@@ -116,3 +116,4 @@ ccc.setup({
 vim.api.nvim_exec([[
     autocmd BufEnter * execute 'cd' expand('%:p:h')
 ]], false)
+require('todo-comments').setup();

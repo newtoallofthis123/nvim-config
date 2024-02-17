@@ -161,4 +161,10 @@ return require('packer').startup(function(use)
             })
         end
     }
+
+    -- Todo Comments
+    use {
+        'folke/todo-comments.nvim',
+        requires = { { 'nvim-lua/plenary.nvim' } }
+    }
 end)
