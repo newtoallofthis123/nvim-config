@@ -21,7 +21,7 @@ vim.cmd("set shiftwidth=4")
 vim.cmd("set smarttab")
 vim.cmd("set softtabstop=4")
 vim.cmd("set mouse=a")
--- vim.cmd("set guicursor=n-v-c-i:ver1")
+vim.cmd("set guicursor=n-v-c-i:ver1")
 vim.cmd("set termguicolors")
 vim.cmd("set encoding=UTF-8")
 
