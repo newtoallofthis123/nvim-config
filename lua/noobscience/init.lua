@@ -1,5 +1,0 @@
-require("noobscience.plugins")
-require("noobscience.lsp")
-require("noobscience.remaps")
-require("noobscience.settings")
-require("noobscience.vim")

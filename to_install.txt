@@ -1,0 +1,6 @@
+
+https://github.com/sindrets/diffview.nvim
+https://github.com/simonmclean/triptych.nvim
+https://github.com/Bekaboo/dropbar.nvim
+https://github.com/echasnovski/mini.nvim
+https://github.com/ggandor/leap.nvim

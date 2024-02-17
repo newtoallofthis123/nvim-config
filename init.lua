@@ -5,6 +5,5 @@
 -- It is okayish documented, but I will try to improve it in the future
 -- Licensed under the MIT License for Ishan Joshi
 
-require("entry")
-
-print("Hello Ishan!")
+require("noobscience.core")
+require("noobscience.lazy")
