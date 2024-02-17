@@ -73,8 +73,34 @@ return {
             local lsp_zero = require('lsp-zero')
             lsp_zero.extend_lspconfig()
 
-            local lsp_config = require('lspconfig')
+            vim.filetype.add({ extension = { mdx = 'mdx' } })
+            vim.treesitter.language.register('markdown', {
+                'mdx'
+            })
 
+            vim.filetype.add({ extension = { templ = "templ" } })
+            local lsp_config = require('lspconfig')
+            lsp_config.ocamllsp.setup({
+                cmd = { "ocamllsp" },
+                filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
+                root_dir = lsp_config.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project",
+                    "dune-workspace"),
+                on_attach = on_attach,
+                capabilities = capabilities
+            })
+
+            lsp_config.tailwindcss.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+                init_options = { userLanguages = { templ = "html" } },
+            })
+
+            lsp_config.emmet_ls.setup({
+                -- on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ" },
+            })
             --- if you want to know more about lsp-zero and mason.nvim
             --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
             lsp_zero.on_attach(function(client, bufnr)
