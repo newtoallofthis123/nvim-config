@@ -15,7 +15,9 @@ return {
         lazy = false,
         config = true,
     },
-
+    {
+        'onsails/lspkind.nvim'
+    },
     -- Autocompletion
     {
         'hrsh7th/nvim-cmp',
@@ -33,9 +35,22 @@ return {
             -- And you can configure cmp even more, if you want to.
             local cmp = require('cmp')
             local cmp_action = lsp_zero.cmp_action()
-
+            local lspkind = require('lspkind')
             cmp.setup({
-                formatting = lsp_zero.cmp_format(),
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = 'symbol',
+                        maxwidth = 50,
+                        ellipsis_char = '...',
+                    })
+
+                },
+                window = {
+                    border = "rounded",
+                },
+                completion = {
+                    border = "rounded",
+                },
                 mapping = cmp.mapping.preset.insert({
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
@@ -90,6 +105,20 @@ return {
                 capabilities = capabilities
             })
 
+            lsp_config.clangd.setup {
+                on_attach = function(client, bufnr)
+                    client.server_capabilities.signatureHelpProvider = false
+                    on_attach(client, bufnr)
+                end,
+                capabilities = capabilities,
+                cmd = {
+                    "clangd",
+                    "--clang-tidy",
+                    "--background-index",
+                    "--clang-flag=-std=c++20"
+                },
+            }
+
             lsp_config.tailwindcss.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
@@ -104,7 +133,7 @@ return {
             })
             --- if you want to know more about lsp-zero and mason.nvim
             --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-            lsp_zero.on_attach(function(client, bufnr)
+            lsp_zero.on_attach(function(_, bufnr)
                 -- see :help lsp-zero-keybindings
                 -- to learn the available actions
                 lsp_zero.default_keymaps({ buffer = bufnr })
@@ -154,6 +183,11 @@ return {
                 opts.desc = "Restart LSP"
                 keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
             end)
+
+            -- set tab width to 2 when cpp file is opened
+            vim.api.nvim_exec([[
+                autocmd FileType cpp setlocal tabstop=2 shiftwidth=2
+            ]], false)
 
             lsp_zero.set_sign_icons({
                 error = '✘',
