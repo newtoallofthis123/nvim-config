@@ -26,7 +26,10 @@ vim.keymap.set('n', '<C-S>', vim.cmd.w)
 vim.keymap.set('n', '<C-Q>', vim.cmd.qa)
 
 -- Quickly Change Colorschemes
-vim.keymap.set('n', '<leader>li', function() vim.cmd('colorscheme rose-pine-dawn') end)
+vim.keymap.set('n', '<leader>li', function() 
+    vim.opt.background = 'light'
+    vim.cmd('colorscheme vscode')
+end)
 vim.keymap.set('n', '<leader>lv', function() vim.opt.background = 'light' end)
 vim.keymap.set('n', '<leader>dv', function() vim.opt.background = 'dark' end)
 vim.keymap.set('n', '<leader>da', function() vim.cmd('colorscheme vscode') end)
@@ -40,4 +43,7 @@ vim.api.nvim_set_keymap('n', '<leader>ga', ':Git add %<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gc', ':Git commit<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gm', ':Git push origin main<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gp', ':Git push<CR>', { noremap = true })
+
 vim.api.nvim_set_keymap('n', '<leader>gs', ':Git status<CR>', { noremap = true })
+
+vim.api.nvim_set_keymap('n', '<leader>Tr', ':TransparentToggle<CR>', { noremap = true })

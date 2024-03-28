@@ -18,7 +18,7 @@ return {
             },
             defaults = {
                 path_display = { "truncate " },
-                borderchars = { "█", " ", "▀", "█", "█", " ", " ", "▀" },
+                -- borderchars = { "█", " ", "▀", "█", "█", " ", " ", "▀" },
                 mappings = {
                     i = {
                         ["<C-k>"] = actions.move_selection_previous, -- move to prev result
@@ -30,6 +30,7 @@ return {
         })
 
         telescope.load_extension("fzf")
+        telescope.load_extension("emoji")
 
         -- set keymaps
         local keymap = vim.keymap -- for conciseness
@@ -38,5 +39,6 @@ return {
         keymap.set("n", "<leader>e", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy find recent files" })
         keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
         keymap.set("n", "<leader>fg", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+        keymap.set("n", "<leader>fe", "<cmd>Telescope emoji<cr>", { desc = "Find emoji" })
     end,
 }
