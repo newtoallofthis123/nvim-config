@@ -25,8 +25,8 @@ vim.keymap.set('n', '<C-S>', vim.cmd.w)
 
 vim.keymap.set('n', '<C-Q>', vim.cmd.qa)
 
--- Quickly Change Colorschemes
-vim.keymap.set('n', '<leader>li', function() 
+-- Quickly Change Color schemes
+vim.keymap.set('n', '<leader>li', function()
     vim.opt.background = 'light'
     vim.cmd('colorscheme vscode')
 end)
@@ -41,9 +41,17 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>ga', ':Git add %<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gc', ':Git commit<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>gm', ':Git push origin main<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>gp', ':Git push<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gp', ':Git push', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>gs', ':Git status<CR>', { noremap = true })
 
-vim.api.nvim_set_keymap('n', '<leader>Tr', ':TransparentToggle<CR>', { noremap = true })
+-- Some formatting keymaps
+vim.api.nvim_set_keymap('n', '<leader>fpy', ':!black %<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>fph', ':!pretty-php %<CR>', { noremap = true })
+
+-- Some Buffers and stuff
+vim.api.nvim_set_keymap('n', '<leader>bn', ':bn<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>bp', ':bp<CR>', { noremap = true })
+
+vim.api.nvim_set_keymap('n', '<leader>s', ':set spell spelllang=en<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>s', ':set spell spelllang=en<CR>', { noremap = true })

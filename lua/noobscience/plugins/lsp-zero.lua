@@ -6,7 +6,7 @@ return {
         config = false,
         init = function()
             -- Disable automatic setup, we are doing it manually
-            vim.g.lsp_zero_extend_cmp = 0
+            vim.g.lsp_zero_extend_cmp = 1
             vim.g.lsp_zero_extend_lspconfig = 0
         end,
     },
@@ -52,6 +52,8 @@ return {
                     border = "rounded",
                 },
                 mapping = cmp.mapping.preset.insert({
+                    ["<C-k>"] = cmp.mapping.select_prev_item(),
+                    ["<C-j>"] = cmp.mapping.select_next_item(),
                     ['<C-Space>'] = cmp.mapping.complete(),
                     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
                     ['<C-d>'] = cmp.mapping.scroll_docs(4),
@@ -71,7 +73,7 @@ return {
         config = function()
             require("go").setup()
         end,
-        event = { "CmdlineEnter" },
+        -- event = { "CmdlineEnter" },
         ft = { "go", 'gomod' },
         build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
     },
@@ -186,7 +188,7 @@ return {
 
             -- set tab width to 2 when cpp file is opened
             vim.api.nvim_exec([[
-                autocmd FileType cpp setlocal tabstop=2 shiftwidth=2
+                autocmd FileType cpp,c setlocal tabstop=2 shiftwidth=2
             ]], false)
 
             lsp_zero.set_sign_icons({
@@ -219,11 +221,11 @@ return {
                     require("go").setup()
                 end
             })
-            local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+            local format_sync_grp = vim.api.nvim_create_augroup("goimports", {})
             vim.api.nvim_create_autocmd("BufWritePre", {
                 pattern = "*.go",
                 callback = function()
-                    require('go.format').goimport()
+                    require('go.format').goimports()
                 end,
                 group = format_sync_grp,
             })

@@ -12,6 +12,7 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
 vim.opt.colorcolumn = "80"
+vim.o.clipboard = "unnamedplus"
 
 vim.cmd("set number")
 vim.cmd("set relativenumber")
@@ -25,5 +26,4 @@ vim.cmd("set mouse=a")
 vim.cmd("set termguicolors")
 vim.cmd("set encoding=UTF-8")
 
-vim.cmd("set clipboard=unnamedplus")
 vim.cmd("set wildmenu")
