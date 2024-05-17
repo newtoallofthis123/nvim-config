@@ -10,12 +10,18 @@ return {
         'projekt0n/github-nvim-theme',
     },
     {
-    "polirritmico/monokai-nightasty.nvim",
+        'sainnhe/gruvbox-material',
+        config = function()
+            vim.g.gruvbox_material_background         = 'hard'
+            vim.g.gruvbox_material_better_performance = 1
+        end
+    },
+    {
+        "polirritmico/monokai-nightasty.nvim",
     },
     {
         "chiendo97/intellij.vim"
-    }
-    ,
+    },
     {
         "catppuccin/nvim",
         name = "catppuccin",
@@ -27,17 +33,15 @@ return {
         "folke/tokyonight.nvim",
         -- priority = 1000,
         -- config = function()
-            -- vim.opt.background = 'light'
-            -- wow! This is so damn cool :)
-            -- require("tokyonight").setup({
-            --     transparent = true,
-            --     styles = {
-            --         comments = { italic = true },
-            --         keywords = { italic = true },
-            --     },
-            -- })
-            -- vim.cmd([[colorscheme tokyonight-night]])
--- :        end
+        --     -- vim.opt.background = 'light'
+        --     require("tokyonight").setup({
+        --         styles = {
+        --             comments = { italic = true },
+        --             keywords = { italic = true },
+        --         },
+        --     })
+        --     vim.cmd([[colorscheme tokyonight-night]])
+        -- end
     },
     {
         'Mofiqul/vscode.nvim',
@@ -71,4 +75,7 @@ return {
         'pwntester/nautilus.nvim',
     },
     { 'nanotech/jellybeans.vim' },
+    { "EdenEast/nightfox.nvim" },
+    { "rebelot/kanagawa.nvim" },
+    { 'olivercederborg/poimandres.nvim' }
 }

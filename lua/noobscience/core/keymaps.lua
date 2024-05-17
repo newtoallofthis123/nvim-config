@@ -1,13 +1,9 @@
 vim.g.mapleader = " "
 
-local keymap = vim.keymap
+-- local keymap = vim.keymap
 
-keymap.set("n", "<leader>d", function() vim.cmd('bd') end)
+vim.keymap.set("n", "<leader>d", function() vim.cmd('bd!') end)
 vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
-
-keymap.set("n", "<leader>l", function() vim.cmd('terminal fish') end)
-
-keymap.set("t", "<C-t>", function() vim.cmd('bd!') end)
 
 vim.api.nvim_set_keymap('n', '<C-Tab>', ':bnext<CR>', { noremap = true })
 
@@ -18,6 +14,7 @@ vim.api.nvim_set_keymap('n', '<leader>n', ':e <Space>', { noremap = true })
 
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
+-- Thank you ThePrimagen
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
@@ -32,7 +29,7 @@ vim.keymap.set('n', '<leader>li', function()
 end)
 vim.keymap.set('n', '<leader>lv', function() vim.opt.background = 'light' end)
 vim.keymap.set('n', '<leader>dv', function() vim.opt.background = 'dark' end)
-vim.keymap.set('n', '<leader>da', function() vim.cmd('colorscheme vscode') end)
+vim.keymap.set('n', '<leader>da', function() vim.cmd('colorscheme gruvbox-material') end)
 
 vim.o.completeopt = "menuone,noinsert,noselect"
 
@@ -55,3 +52,12 @@ vim.api.nvim_set_keymap('n', '<leader>bp', ':bp<CR>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>s', ':set spell spelllang=en<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>s', ':set spell spelllang=en<CR>', { noremap = true })
+
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+vim.keymap.set('n', '<leader>xt', ':TodoTrouble<CR>', { desc = 'Todo Trobule' })
+
+vim.keymap.set('n', '<leader>go', ':!qit o<CR>', { desc = 'Open Git Repo in the browser' })

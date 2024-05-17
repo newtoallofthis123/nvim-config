@@ -12,7 +12,7 @@ vim.opt.incsearch = true
 vim.opt.termguicolors = true
 
 vim.opt.colorcolumn = "80"
-vim.o.clipboard = "unnamedplus"
+-- vim.o.clipboard = "unnamedplus"
 
 vim.cmd("set number")
 vim.cmd("set relativenumber")
@@ -27,3 +27,11 @@ vim.cmd("set termguicolors")
 vim.cmd("set encoding=UTF-8")
 
 vim.cmd("set wildmenu")
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
