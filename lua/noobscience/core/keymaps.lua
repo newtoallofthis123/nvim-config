@@ -17,6 +17,7 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- Thank you ThePrimagen
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
 
 vim.keymap.set('n', '<C-S>', vim.cmd.w)
 
@@ -29,7 +30,7 @@ vim.keymap.set('n', '<leader>li', function()
 end)
 vim.keymap.set('n', '<leader>lv', function() vim.opt.background = 'light' end)
 vim.keymap.set('n', '<leader>dv', function() vim.opt.background = 'dark' end)
-vim.keymap.set('n', '<leader>da', function() vim.cmd('colorscheme gruvbox-material') end)
+vim.keymap.set('n', '<leader>da', function() vim.cmd('colorscheme monokai-pro') end)
 
 vim.o.completeopt = "menuone,noinsert,noselect"
 

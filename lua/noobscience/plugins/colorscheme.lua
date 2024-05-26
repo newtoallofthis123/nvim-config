@@ -14,6 +14,7 @@ return {
         config = function()
             vim.g.gruvbox_material_background         = 'hard'
             vim.g.gruvbox_material_better_performance = 1
+            -- vim.cmd([[colorscheme gruvbox-material]])
         end
     },
     {
@@ -25,6 +26,10 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
+        -- priority = 1000,
+        -- config = function()
+        --     vim.cmd([[colorscheme catppuccin-mocha]])
+        -- end
     },
     {
         "olimorris/onedarkpro.nvim",
@@ -75,7 +80,14 @@ return {
         'pwntester/nautilus.nvim',
     },
     { 'nanotech/jellybeans.vim' },
-    { "EdenEast/nightfox.nvim" },
+    {
+        "EdenEast/nightfox.nvim",
+        -- priority = 1000,
+        -- config = function()
+        --     vim.cmd([[colorscheme duskfox]])
+        -- end
+    },
     { "rebelot/kanagawa.nvim" },
-    { 'olivercederborg/poimandres.nvim' }
+    { 'olivercederborg/poimandres.nvim' },
+    { 'shaunsingh/nord.nvim' }
 }
