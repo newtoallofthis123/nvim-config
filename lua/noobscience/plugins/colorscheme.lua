@@ -18,21 +18,26 @@ return {
         end
     },
     {
-        "polirritmico/monokai-nightasty.nvim",
-    },
-    {
-        "chiendo97/intellij.vim"
-    },
-    {
         "catppuccin/nvim",
         name = "catppuccin",
-        -- priority = 1000,
-        -- config = function()
-        --     vim.cmd([[colorscheme catppuccin-mocha]])
-        -- end
-    },
-    {
-        "olimorris/onedarkpro.nvim",
+        priority = 1000,
+        config = function()
+            require("catppuccin").setup({
+                flavour = "auto",
+                show_end_of_buffer = true,
+                no_bold = true,
+                integrations = {
+                    cmp = true,
+                    gitsigns = true,
+                    nvimtree = true,
+                    treesitter = true,
+                    notify = true,
+                    fidget = true,
+                    harpoon = true,
+                },
+            })
+            vim.cmd([[colorscheme catppuccin-mocha]])
+        end
     },
     {
         "folke/tokyonight.nvim",
@@ -40,6 +45,7 @@ return {
         -- config = function()
         --     -- vim.opt.background = 'light'
         --     require("tokyonight").setup({
+        --         -- transparent = true,
         --         styles = {
         --             comments = { italic = true },
         --             keywords = { italic = true },
@@ -58,14 +64,29 @@ return {
     },
     {
         'datsfilipe/vesper.nvim',
+        -- priority = 1000,
+        -- config = function()
+        --     vim.cmd([[colorscheme vesper]])
+        -- end
     },
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        priority = 1000,
-        config = function()
-            vim.cmd([[colorscheme rose-pine]])
-        end
+        -- priority = 1000,
+        -- config = function()
+        --     require("rose-pine").setup({
+        --         variant = "auto",
+        --         dark_variant = "main",
+        --         dim_inactive_windows = false,
+        --         extend_background_behind_borders = true,
+        --         styles = {
+        --             bold = false,
+        --             italic = false,
+        --             transparency = false,
+        --         }
+        --     })
+        --     vim.cmd([[colorscheme rose-pine]])
+        -- end
     },
     { 'frenzyexists/aquarium-vim',
     },
@@ -76,9 +97,6 @@ return {
     {
         'HoNamDuong/hybrid.nvim',
     },
-    {
-        'pwntester/nautilus.nvim',
-    },
     { 'nanotech/jellybeans.vim' },
     {
         "EdenEast/nightfox.nvim",
@@ -88,6 +106,4 @@ return {
         -- end
     },
     { "rebelot/kanagawa.nvim" },
-    { 'olivercederborg/poimandres.nvim' },
-    { 'shaunsingh/nord.nvim' }
 }

@@ -10,16 +10,14 @@ return {
             },
             sections = {
                 lualine_a = {
-                    -- { 'mode', separator = { left = '' }, right_padding = 2 },
-                    { 'mode', right_padding = 2 },
+                    { 'mode', separator = { left = '' }, right_padding = 2 },
                 },
                 lualine_b = { 'filename', 'branch', 'diff', 'diagnostics' },
-                lualine_c = { 'fileformat'},
+                lualine_c = { 'buffers'},
                 lualine_x = {'hostname'},
-                lualine_y = { 'encoding', 'filetype', 'progress' },
+                lualine_y = { 'filesize', 'filetype', 'progress' },
                 lualine_z = {
-                    -- { 'location', separator = { right = '' }, left_padding = 2 },
-                    { 'location', left_padding = 2 },
+                    { 'location', separator = { right = '' }, left_padding = 2 },
                 },
             },
             inactive_sections = {
