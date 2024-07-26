@@ -20,10 +20,17 @@ return
                 },
                 signature = { enabled = false },
                 hover = { enabled = false },
-            }
+            },
+            messages = {
+                view = "notify",           -- default view for messages
+                view_error = "notify",     -- view for errors
+                view_warn = "notify",      -- view for warnings
+                view_history = "messages", -- view for :messages
+            },
         })
         require("notify").setup({
             background_colour = "#000000",
         })
-    end
+    end,
+    enabled = false,
 }

@@ -26,7 +26,7 @@ vim.keymap.set('n', '<C-Q>', vim.cmd.qa)
 -- Quickly Change Color schemes
 vim.keymap.set('n', '<leader>li', function()
     vim.opt.background = 'light'
-    vim.cmd('colorscheme vscode')
+    vim.cmd('colorscheme PaperColor')
 end)
 vim.keymap.set('n', '<leader>lv', function() vim.opt.background = 'light' end)
 vim.keymap.set('n', '<leader>dv', function() vim.opt.background = 'dark' end)

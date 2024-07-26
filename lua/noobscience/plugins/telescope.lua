@@ -11,7 +11,7 @@ return {
         local actions = require("telescope.actions")
 
         telescope.setup({
-            theme='catppuccin',
+            theme = 'catppuccin',
             pickers = {
                 colorscheme = {
                     enable_preview = true,

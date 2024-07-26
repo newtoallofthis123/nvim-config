@@ -86,6 +86,9 @@ return {
         'neovim/nvim-lspconfig',
         cmd = { 'LspInfo', 'LspInstall', 'LspStart' },
         event = { 'BufReadPre', 'BufNewFile' },
+        opts = {
+            inlay_hints = { enabled = true },
+        },
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'williamboman/mason-lspconfig.nvim' },
@@ -126,6 +129,18 @@ return {
                 },
             }
 
+            require("lspconfig").zls.setup({
+              settings = {
+                zls = {
+                  enable_inlay_hints = true,
+                  inlay_hints_show_builtin = true,
+                  inlay_hints_exclude_single_argument = true,
+                  inlay_hints_hide_redundant_param_names = false,
+                  inlay_hints_hide_redundant_param_names_last_token = false,
+                },
+              }
+            })
+
             lsp_config.tailwindcss.setup({
                 on_attach = on_attach,
                 capabilities = capabilities,
@@ -136,7 +151,7 @@ return {
             lsp_config.emmet_ls.setup({
                 -- on_attach = on_attach,
                 capabilities = capabilities,
-                filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ" },
+                filetypes = { "xml", "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ" },
             })
             --- if you want to know more about lsp-zero and mason.nvim
             --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md

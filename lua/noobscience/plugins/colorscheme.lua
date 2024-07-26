@@ -3,19 +3,24 @@ return {
         "loctvl842/monokai-pro.nvim",
         -- priority = 1000,
         -- config = function()
-        --     vim.cmd([[colorscheme monokai-pro]])
+        --     vim.cmd([[colorscheme monokai-pro-spectrum]])
         -- end
     },
     {
         'projekt0n/github-nvim-theme',
+        -- priority = 1000,
+        -- config = function()
+        --   vim.cmd([[colorscheme github_light]])
+        -- end
     },
     {
         'sainnhe/gruvbox-material',
-        config = function()
-            vim.g.gruvbox_material_background         = 'hard'
-            vim.g.gruvbox_material_better_performance = 1
-            -- vim.cmd([[colorscheme gruvbox-material]])
-        end
+        -- priority = 1000,
+        -- config = function()
+        --   vim.g.gruvbox_material_background         = 'hard'
+        --   vim.g.gruvbox_material_better_performance = 1
+        --   vim.cmd([[colorscheme gruvbox-material]])
+        -- end
     },
     {
         "catppuccin/nvim",
@@ -26,15 +31,6 @@ return {
                 flavour = "auto",
                 show_end_of_buffer = true,
                 no_bold = true,
-                integrations = {
-                    cmp = true,
-                    gitsigns = true,
-                    nvimtree = true,
-                    treesitter = true,
-                    notify = true,
-                    fidget = true,
-                    harpoon = true,
-                },
             })
             vim.cmd([[colorscheme catppuccin-mocha]])
         end
@@ -43,30 +39,30 @@ return {
         "folke/tokyonight.nvim",
         -- priority = 1000,
         -- config = function()
-        --     -- vim.opt.background = 'light'
-        --     require("tokyonight").setup({
-        --         -- transparent = true,
-        --         styles = {
-        --             comments = { italic = true },
-        --             keywords = { italic = true },
-        --         },
-        --     })
-        --     vim.cmd([[colorscheme tokyonight-night]])
+        --   -- vim.opt.background = 'light'
+        --   require("tokyonight").setup({
+        --     -- transparent = true,
+        --     styles = {
+        --       comments = { italic = true },
+        --       keywords = { italic = true },
+        --     },
+        --   })
+        --   vim.cmd([[colorscheme tokyonight-night]])
         -- end
     },
     {
         'Mofiqul/vscode.nvim',
         -- priority = 1000,
         -- config = function()
-        --     -- vim.opt.background = 'light'
-        --     vim.cmd([[colorscheme vscode]])
+        --   -- vim.opt.background = 'light'
+        --   vim.cmd([[colorscheme vscode]])
         -- end
     },
     {
         'datsfilipe/vesper.nvim',
         -- priority = 1000,
         -- config = function()
-        --     vim.cmd([[colorscheme vesper]])
+        --   vim.cmd([[colorscheme vesper]])
         -- end
     },
     {
@@ -88,16 +84,9 @@ return {
         --     vim.cmd([[colorscheme rose-pine]])
         -- end
     },
-    { 'frenzyexists/aquarium-vim',
-    },
     {
-        'ramojus/mellifluous.nvim',
-
+        'NLKNguyen/papercolor-theme'
     },
-    {
-        'HoNamDuong/hybrid.nvim',
-    },
-    { 'nanotech/jellybeans.vim' },
     {
         "EdenEast/nightfox.nvim",
         -- priority = 1000,
@@ -105,5 +94,4 @@ return {
         --     vim.cmd([[colorscheme duskfox]])
         -- end
     },
-    { "rebelot/kanagawa.nvim" },
 }
