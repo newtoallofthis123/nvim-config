@@ -46,9 +46,9 @@ return {
 
                 },
                 sources = {
-                    {name = "nvim_lsp"},
-                    {name = "path"},
-                    {name = "buffer"},
+                    { name = "nvim_lsp" },
+                    { name = "path" },
+                    { name = "buffer" },
                 },
                 window = {
                     border = "rounded",
@@ -130,16 +130,31 @@ return {
             }
 
             require("lspconfig").zls.setup({
-              settings = {
-                zls = {
-                  enable_inlay_hints = true,
-                  inlay_hints_show_builtin = true,
-                  inlay_hints_exclude_single_argument = true,
-                  inlay_hints_hide_redundant_param_names = false,
-                  inlay_hints_hide_redundant_param_names_last_token = false,
-                },
-              }
+                settings = {
+                    zls = {
+                        enable_inlay_hints = true,
+                        inlay_hints_show_builtin = true,
+                        inlay_hints_exclude_single_argument = true,
+                        inlay_hints_hide_redundant_param_names = false,
+                        inlay_hints_hide_redundant_param_names_last_token = false,
+                    },
+                }
             })
+
+            local function on_attach(client, bufnr)
+                vim.api.nvim_create_augroup("lsp_augroup", { clear = true })
+
+                vim.api.nvim_create_autocmd("InsertEnter", {
+                    buffer = bufnr,
+                    callback = function() vim.lsp.inlay_hint.enable() end,
+                    group = "lsp_augroup",
+                })
+                vim.api.nvim_create_autocmd("InsertLeave", {
+                    buffer = bufnr,
+                    callback = function() vim.lsp.inlay_hint.enable() end,
+                    group = "lsp_augroup",
+                })
+            end
 
             lsp_config.tailwindcss.setup({
                 on_attach = on_attach,
@@ -151,7 +166,7 @@ return {
             lsp_config.emmet_ls.setup({
                 -- on_attach = on_attach,
                 capabilities = capabilities,
-                filetypes = { "xml", "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ" },
+                filetypes = { "xml", "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ", "blade"},
             })
             --- if you want to know more about lsp-zero and mason.nvim
             --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
@@ -173,6 +188,9 @@ return {
                 keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
                 opts.desc = "Show LSP definitions"
+                keymap.set("n", "<leader>o", "<cmd>Telescope lsp_document_symbols<CR>", opts) -- show lsp definitions
+
+                opts.desc = "Show LSP definitions"
                 keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
 
                 opts.desc = "Show LSP implementations"
@@ -189,6 +207,9 @@ return {
 
                 opts.desc = "Show buffer diagnostics"
                 keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", opts) -- show  diagnostics for file
+
+                opts.desc = "Show workspace diagnostics"
+                keymap.set("n", "<leader>A", "<cmd>Telescope diagnostics<CR>", opts) -- show  diagnostics for file
 
                 opts.desc = "Show line diagnostics"
                 keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts) -- show diagnostics for line

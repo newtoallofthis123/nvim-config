@@ -62,3 +62,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<leader>xt', ':TodoTrouble<CR>', { desc = 'Todo Trobule' })
 
 vim.keymap.set('n', '<leader>go', ':!qit o<CR>', { desc = 'Open Git Repo in the browser' })
+
+vim.keymap.set('n', '<leader>q', '<cmd>copen<CR>zz', { desc = 'Open the quick list buffer' })
+vim.keymap.set('n', '<leader>;', '<cmd>cnext<CR>zz', { desc = 'Next item in quickfix list' })
+vim.keymap.set('n', '<leader>h', '<cmd>lnext<CR>zz', { desc = 'Next item in location list' })

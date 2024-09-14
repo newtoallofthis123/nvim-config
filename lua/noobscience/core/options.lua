@@ -11,7 +11,7 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
-vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "80"
 -- vim.o.clipboard = "unnamedplus"
 
 vim.cmd("set number")
@@ -24,6 +24,10 @@ vim.cmd("set termguicolors")
 vim.cmd("set encoding=UTF-8")
 
 vim.cmd("set wildmenu")
+vim.cmd("set nocompatible")
+vim.cmd("set path+=**")
+vim.cmd("set wildmenu")
+vim.cmd("set wildignore+=**/.git/**")
 
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
@@ -32,3 +36,18 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.highlight.on_yank()
     end,
 })
+
+-- Autocmd to persist undo tree on Neovim exit
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    vim.cmd("UndotreePersistUndo")
+  end
+})
+
+vim.filetype.add({
+  pattern = {
+    ['.*%.blade%.php'] = 'blade',
+  },
+})
+
+vim.cmd([[colorscheme retrobox]])

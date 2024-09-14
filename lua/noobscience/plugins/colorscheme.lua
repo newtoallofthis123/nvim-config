@@ -25,15 +25,15 @@ return {
     {
         "catppuccin/nvim",
         name = "catppuccin",
-        priority = 1000,
-        config = function()
-            require("catppuccin").setup({
-                flavour = "auto",
-                show_end_of_buffer = true,
-                no_bold = true,
-            })
-            vim.cmd([[colorscheme catppuccin-mocha]])
-        end
+        -- priority = 1000,
+        -- config = function()
+        --     require("catppuccin").setup({
+        --         flavour = "auto",
+        --         show_end_of_buffer = true,
+        --         no_bold = true,
+        --     })
+        --     vim.cmd([[colorscheme catppuccin-mocha]])
+        -- end
     },
     {
         "folke/tokyonight.nvim",
@@ -68,21 +68,21 @@ return {
     {
         "rose-pine/neovim",
         name = "rose-pine",
-        -- priority = 1000,
-        -- config = function()
-        --     require("rose-pine").setup({
-        --         variant = "auto",
-        --         dark_variant = "main",
-        --         dim_inactive_windows = false,
-        --         extend_background_behind_borders = true,
-        --         styles = {
-        --             bold = false,
-        --             italic = false,
-        --             transparency = false,
-        --         }
-        --     })
-        --     vim.cmd([[colorscheme rose-pine]])
-        -- end
+        priority = 1000,
+        config = function()
+            -- require("rose-pine").setup({
+            --     variant = "auto",
+            --     dark_variant = "main",
+            --     dim_inactive_windows = false,
+            --     extend_background_behind_borders = true,
+            --     styles = {
+            --         bold = false,
+            --         italic = false,
+            --         transparency = false,
+            --     }
+            -- })
+            -- vim.cmd([[colorscheme rose-pine]])
+        end
     },
     {
         'NLKNguyen/papercolor-theme'
