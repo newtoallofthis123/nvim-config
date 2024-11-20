@@ -45,5 +45,6 @@ return {
     keymap.set("n", "<leader>rb", "<cmd>TMUXcompile Make<cr>", { desc = "Make in a tmux window" })
     keymap.set("n", "<leader>rr", "<cmd>TMUXcompile Run<cr>", { desc = "Run in a tmux window" })
 
-    end
+    end,
+    enable = false,
 }
