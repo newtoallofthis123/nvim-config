@@ -163,10 +163,20 @@ return {
                 init_options = { userLanguages = { templ = "html" } },
             })
 
+            lsp_config.pyright.setup({
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "off",
+                        }
+                    }
+                }
+            })
+
             lsp_config.emmet_ls.setup({
                 -- on_attach = on_attach,
                 capabilities = capabilities,
-                filetypes = { "xml", "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ", "blade"},
+                filetypes = { "xml", "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ", "blade" },
             })
             --- if you want to know more about lsp-zero and mason.nvim
             --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md

@@ -14,21 +14,21 @@ return {
         config = function()
             -- set keymap
             local keymap = vim.keymap -- for conciseness
-            keymap.set({ "n", "i", "v" }, "<leader>ccq",
+            keymap.set({ "n", "v" }, "<leader>ccq",
                 function()
                     local input = vim.fn.input("Quick Chat: ")
                     if input ~= "" then
                         require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
                     end
                 end, { desc = "CopilotChat - Quick chat" })
-            keymap.set({ "n", "i", "v" }, "<leader>cct",
+            keymap.set({ "n", "v" }, "<leader>cct",
                 function()
                     local actions = require("CopilotChat.actions")
                     require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
                 end, { desc = "CopilotChat - Telescope" })
 
-            keymap.set({ "n", "i", "v" }, "<leader>ccf", ":CopilotChatFix<CR>", { desc = "CopilotChat - Fix chat" })
-            keymap.set({ "n", "i", "v" }, "<leader>ccd", ":CopilotChatDoc<CR>", { desc = "CopilotChat - Doc chat" })
+            keymap.set({ "n", "v" }, "<leader>ccf", ":CopilotChatFix<CR>", { desc = "CopilotChat - Fix chat" })
+            keymap.set({ "n", "v" }, "<leader>ccd", ":CopilotChatDoc<CR>", { desc = "CopilotChat - Doc chat" })
             require("CopilotChat").setup()
         end
     }

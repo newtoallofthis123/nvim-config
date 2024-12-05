@@ -24,7 +24,7 @@ return {
                     i = {
                         ["<C-k>"] = actions.move_selection_previous, -- move to prev result
                         ["<C-j>"] = actions.move_selection_next,     -- move to next result
-                        ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                        ["<C-l>"] = actions.smart_send_to_qflist + actions.open_qflist,
                     },
                 },
             },
@@ -37,10 +37,11 @@ return {
         local keymap = vim.keymap -- for conciseness
 
         keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-        keymap.set("n", "<leader>fe", "<cmd>Telescope frecency<cr>", { desc = "Frecency find recent files" })
+        keymap.set("n", "<leader>w", "<cmd>Telescope frecency<cr>", { desc = "Frecency find recent files" })
         keymap.set("n", "<leader>e", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy find recent files" })
         keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
         keymap.set("n", "<leader>fg", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
         keymap.set("n", "<leader>fe", "<cmd>Telescope emoji<cr>", { desc = "Find emoji" })
+        keymap.set("n", "<leader>xx", "<cmd>TodoTelescope<cr>", { desc = "Todo Telescope" })
     end,
 }
