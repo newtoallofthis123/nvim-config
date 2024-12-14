@@ -4,11 +4,6 @@ return {
         branch = 'v3.x',
         lazy = true,
         config = false,
-        init = function()
-            -- Disable automatic setup, we are doing it manually
-            vim.g.lsp_zero_extend_cmp = 1
-            vim.g.lsp_zero_extend_lspconfig = 0
-        end,
     },
     {
         'williamboman/mason.nvim',
@@ -71,16 +66,15 @@ return {
     },
     {
         "ray-x/go.nvim",
-        dependencies = { -- optional packages
+        dependencies = {
             "neovim/nvim-lspconfig",
             "nvim-treesitter/nvim-treesitter",
         },
         config = function()
             require("go").setup()
         end,
-        -- event = { "CmdlineEnter" },
         ft = { "go", 'gomod' },
-        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+        build = ':lua require("go.install").update_all_sync()'
     },
     {
         'neovim/nvim-lspconfig',
@@ -106,6 +100,8 @@ return {
 
             vim.filetype.add({ extension = { templ = "templ" } })
             local lsp_config = require('lspconfig')
+
+            -- Ocamll LSP
             lsp_config.ocamllsp.setup({
                 cmd = { "ocamllsp" },
                 filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
@@ -115,6 +111,7 @@ return {
                 capabilities = capabilities
             })
 
+            -- C++ LSP
             lsp_config.clangd.setup {
                 on_attach = function(client, bufnr)
                     client.server_capabilities.signatureHelpProvider = false
@@ -129,7 +126,8 @@ return {
                 },
             }
 
-            require("lspconfig").zls.setup({
+            -- Zig Lsp
+            lsp_config.zls.setup({
                 settings = {
                     zls = {
                         enable_inlay_hints = true,
@@ -139,6 +137,31 @@ return {
                         inlay_hints_hide_redundant_param_names_last_token = false,
                     },
                 }
+            })
+            
+            -- Tailwind LSP
+            lsp_config.tailwindcss.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+                init_options = { userLanguages = { templ = "html" } },
+            })
+
+            -- Pyright Lsp
+            lsp_config.pyright.setup({
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "off",
+                        }
+                    }
+                }
+            })
+
+            lsp_config.emmet_ls.setup({
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "xml", "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ", "blade" },
             })
 
             local function on_attach(client, bufnr)
@@ -156,36 +179,9 @@ return {
                 })
             end
 
-            lsp_config.tailwindcss.setup({
-                on_attach = on_attach,
-                capabilities = capabilities,
-                filetypes = { "templ", "astro", "javascript", "typescript", "react" },
-                init_options = { userLanguages = { templ = "html" } },
-            })
-
-            lsp_config.pyright.setup({
-                settings = {
-                    python = {
-                        analysis = {
-                            typeCheckingMode = "off",
-                        }
-                    }
-                }
-            })
-
-            lsp_config.emmet_ls.setup({
-                -- on_attach = on_attach,
-                capabilities = capabilities,
-                filetypes = { "xml", "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue", "templ", "blade" },
-            })
-            --- if you want to know more about lsp-zero and mason.nvim
-            --- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
             lsp_zero.on_attach(function(_, bufnr)
-                -- see :help lsp-zero-keybindings
-                -- to learn the available actions
                 lsp_zero.default_keymaps({ buffer = bufnr })
-
-                local keymap = vim.keymap -- for conciseness
+                local keymap = vim.keymap
 
                 local opts = { noremap = true, silent = true }
                 opts.buffer = bufnr
@@ -237,11 +233,6 @@ return {
                 keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
             end)
 
-            -- set tab width to 2 when cpp file is opened
-            vim.api.nvim_exec([[
-                autocmd FileType cpp,c setlocal tabstop=2 shiftwidth=2
-            ]], false)
-
             lsp_zero.set_sign_icons({
                 error = '✘',
                 warn = '▲',
@@ -253,7 +244,6 @@ return {
                 handlers = {
                     lsp_zero.default_setup,
                     lua_ls = function()
-                        -- (Optional) Configure lua language server for neovim
                         local lua_opts = lsp_zero.nvim_lua_ls()
                         require('lspconfig').lua_ls.setup(lua_opts)
                     end,

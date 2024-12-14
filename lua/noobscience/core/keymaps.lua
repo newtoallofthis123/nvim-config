@@ -52,14 +52,19 @@ vim.api.nvim_set_keymap('n', '<leader>bn', ':bn<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>bp', ':bp<CR>', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>s', ':set spell spelllang=en<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>s', ':set spell spelllang=en<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gS', ':set nospell<CR>', { noremap = true })
 
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
-vim.keymap.set('n', '<leader>xt', ':TodoTrouble<CR>', { desc = 'Todo Trobule' })
+vim.keymap.set('n', '<leader>vs', '<C-w>v', { desc = 'Split window vertically' })
+vim.keymap.set('n', '<leader>hs', '<C-w>s', { desc = 'Split window horizontally' })
+vim.keymap.set('n', '<C-t><Right>', ':tabNext<CR>', { desc = 'Move to the next tab' })
+vim.keymap.set('n', '<C-t><Left>', ':tabprevious<CR>', { desc = 'Move to the previous tab' })
+vim.keymap.set('n', '<C-t>l', ':tabNext<CR>', { desc = 'Move to the next tab' })
+vim.keymap.set('n', '<C-t>h', ':tabprevious<CR>', { desc = 'Move to the previous tab' })
+vim.keymap.set('n', '<C-t><C-t>', ':tabnew<CR>', { desc = 'Create a new tab' })
 
 vim.keymap.set('n', '<leader>go', ':!qit o<CR>', { desc = 'Open Git Repo in the browser' })
 

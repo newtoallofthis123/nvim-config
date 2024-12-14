@@ -10,20 +10,20 @@ return {
         -- Color table for highlights
         -- stylua: ignore
         -- Gruvbox
-        local colors = {
-            bg       = nil,       -- Muted dark gray for background
-            fg       = '#ebdbb2', -- Soft beige for foreground
-            yellow   = '#d79921', -- Muted yellow
-            cyan     = '#689d6a', -- Vintage teal green
-            darkblue = '#458588', -- Muted deep blue
-            green    = '#98971a', -- Olive green
-            orange   = '#d65d0e', -- Rustic orange
-            violet   = '#b16286', -- Muted violet
-            magenta  = '#d3869b', -- Soft magenta
-            blue     = '#83a598', -- Vintage blue
-            red      = '#e0241d', -- Brick red
-        }
-
+        -- local colors = {
+        --     bg       = nil,       -- Muted dark gray for background
+        --     fg       = '#ebdbb2', -- Soft beige for foreground
+        --     yellow   = '#d79921', -- Muted yellow
+        --     cyan     = '#689d6a', -- Vintage teal green
+        --     darkblue = '#458588', -- Muted deep blue
+        --     green    = '#98971a', -- Olive green
+        --     orange   = '#d65d0e', -- Rustic orange
+        --     violet   = '#b16286', -- Muted violet
+        --     magenta  = '#d3869b', -- Soft magenta
+        --     blue     = '#83a598', -- Vintage blue
+        --     red      = '#e0241d', -- Brick red
+        -- }
+        --
         -- local colors = {
         --     bg       = nil, -- White for background
         --     fg       = '#24292e', -- Dark gray for foreground (default text)
@@ -53,19 +53,34 @@ return {
         --     red      = '#eb6f92', -- Rose red
         -- }
 
+        local colors = {
+            bg       = nil,       -- Background (soft dark background, typically transparent)
+            fg       = '#e0def4', -- Soft, off-white for the foreground text
+            yellow   = '#F0DA61', -- Warm amber yellow
+            cyan     = '#59D3E6', -- Muted cyan
+            darkblue = '#31748f', -- Deep teal blue
+            green    = '#77D18A', -- Gentle sage green
+            orange   = '#FA9151', -- Muted peachy orange
+            violet   = '#9389E3', -- Subtle lavender violet
+            blue     = '#3e8fb0', -- Muted sky blue
+            red      = '#FC608C', -- Rose red
+            black    = '#1a1a1a',
+        }
+
         -- local colors = {
-        --     bg       = nil, -- Background (soft dark background, typically transparent)
-        --     fg       = '#e0def4', -- Soft, off-white for the foreground text
-        --     yellow   = '#f6c177', -- Warm amber yellow
-        --     cyan     = '#9ccfd8', -- Muted cyan
-        --     darkblue = '#31748f', -- Deep teal blue
-        --     green    = '#a3be8c', -- Gentle sage green
-        --     orange   = '#ebbcba', -- Muted peachy orange
-        --     violet   = '#c4a7e7', -- Subtle lavender violet
-        --     magenta  = '#e5e9f0', -- Soft, muted pinkish magenta
-        --     blue     = '#3e8fb0', -- Muted sky blue
-        --     red      = '#eb6f92', -- Rose red
+        --     bg       = '#1a1b26', -- Deep dark blue (Tokyo Night background)
+        --     fg       = '#c0caf5', -- Soft white for foreground
+        --     yellow   = '#e0af68', -- Warm yellow
+        --     cyan     = '#7dcfff', -- Light cyan
+        --     darkblue = '#3d59a1', -- Muted deep blue
+        --     green    = '#9ece6a', -- Fresh green
+        --     orange   = '#ff9e64', -- Soft orange
+        --     violet   = '#9d7cd8', -- Soft violet
+        --     magenta  = '#bb9af7', -- Bright magenta
+        --     blue     = '#7aa2f7', -- Bright blue
+        --     red      = '#f7768e', -- Soft red
         -- }
+
 
         local conditions = {
             buffer_not_empty = function()
@@ -126,18 +141,34 @@ return {
             table.insert(config.sections.lualine_x, component)
         end
 
-        ins_left {
-            function()
-                return ''
-            end,
-            color = { fg = colors.blue },                           -- Sets highlighting of component
-            padding = { left = 2, right = 2, top = 2, bottom = 2 }, -- We don't need space before this
-        }
+        -- ins_left {
+        --     function()
+        --         return ''
+        --     end,
+        --     color = { fg = colors.blue },                           -- Sets highlighting of component
+        --     padding = { left = 2, right = 2, top = 2, bottom = 2 }, -- We don't need space before this
+        -- }
 
         ins_left {
             -- mode component
             function()
-                return 'NOOB'
+                local thunder = '󱐋'
+                local mode = vim.fn.mode();
+                if mode == 'n' then
+                    return thunder .. ' NOR'
+                elseif mode == 'i' then
+                    return thunder .. ' INS'
+                elseif mode == 'v' or mode == 'V' or mode == '' then
+                    return thunder .. ' VIS'
+                elseif mode == 'c' then
+                    return thunder .. ' CMD'
+                elseif mode == 't' then
+                    return thunder .. ' TER'
+                elseif mode == 'R' or mode == 'Rv' then
+                    return thunder .. ' REP'
+                else
+                    return thunder .. ' ' .. mode
+                end
             end,
             color = function()
                 -- auto change color according to neovims mode
@@ -147,7 +178,7 @@ return {
                     v = colors.blue,
                     [''] = colors.blue,
                     V = colors.blue,
-                    c = colors.magenta,
+                    c = colors.violet,
                     no = colors.red,
                     s = colors.orange,
                     S = colors.orange,
@@ -163,7 +194,7 @@ return {
                     ['!'] = colors.red,
                     t = colors.red,
                 }
-                return { fg = mode_color[vim.fn.mode()] }
+                return { bg = mode_color[vim.fn.mode()], fg = colors.black, gui = 'bold' }
             end,
             padding = { right = 2, left = 2, top = 2, bottom = 2 },
         }
@@ -177,12 +208,11 @@ return {
         ins_left {
             'filename',
             cond = conditions.buffer_not_empty,
-            color = { fg = colors.magenta, gui = 'bold' },
         }
 
         ins_left { 'location' }
 
-        ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+        -- ins_left { '', color = { fg = colors.fg, gui = 'bold' } }
 
         ins_left {
             'diagnostics',
@@ -212,32 +242,34 @@ return {
                 if next(clients) == nil then
                     return msg
                 end
+                local lsp = '  ';
                 for _, client in ipairs(clients) do
                     local filetypes = client.config.filetypes
                     if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                        return client.name
+                        -- append to lsp
+                        lsp = lsp .. client.name .. ', '
                     end
                 end
+                msg = lsp.sub(lsp, 1, #lsp - 2)
                 return msg
             end,
-            -- icon = '  LSP:',
-            color = { fg = '#f0f0f0' },
+            color = { fg = colors.cyan },
         }
 
         -- Add components to right sections
         ins_right {
-            'o:encoding',       -- option component same as &encoding in viml
+            'progress',       -- option component same as &encoding in viml
             fmt = string.upper, -- I'm not sure why it's upper case either ;)
             cond = conditions.hide_in_width,
             color = { fg = colors.green, gui = 'bold' },
         }
 
-        ins_right {
-            'fileformat',
-            fmt = string.upper,
-            icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-            color = { fg = colors.green, gui = 'bold' },
-        }
+        -- ins_right {
+        --     '',
+        --     fmt = string.upper,
+        --     icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+        --     color = { fg = colors.green, gui = 'bold' },
+        -- }
 
         ins_right {
             'branch',
@@ -247,7 +279,6 @@ return {
 
         ins_right {
             'diff',
-            -- Is it me or the symbol for modified us really weird
             symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
             diff_color = {
                 added = { fg = colors.green },
@@ -257,15 +288,16 @@ return {
             cond = conditions.hide_in_width,
         }
 
-        ins_right {
-            function()
-                return ''
-            end,
-            color = { fg = colors.blue },
-            padding = { left = 1 },
-        }
+        -- ins_right {
+        --     function()
+        --         return ''
+        --     end,
+        --     color = { fg = colors.blue },
+        --     padding = { left = 1 },
+        -- }
 
         -- Now don't forget to initialize lualine
         lualine.setup(config)
-    end
+    end,
+    -- enabled = false
 }

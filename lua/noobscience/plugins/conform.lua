@@ -7,18 +7,18 @@ return {
                 php = { "pretty-php" },
                 lua = { "stylua" },
                 python = { "black" },
+                cpp = {"clang-format"},
                 javascript = { { "prettierd", "prettier" } },
                 html = { { "prettierd", "prettier" } },
                 css = { { "prettierd", "prettier" } },
                 typescript = { { "prettierd", "prettier" } },
+                typescriptreact = { { "prettierd", "prettier" } },
+                javascriptreact = { { "prettierd", "prettier" } },
                 astro = { { "astro", "prettier" } },
                 json = { { "prettierd", "prettier" } },
                 blade = { "blade-formatter" }
             },
-            -- format_on_save = {
-            --   timeout_ms = 500,
-            --   lsp_format = "fallback"
-            -- },
         })
-    end
+        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    end,
 }

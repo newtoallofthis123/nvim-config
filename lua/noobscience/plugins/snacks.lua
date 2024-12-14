@@ -10,10 +10,38 @@ return
         scratch = {
             name = "Bin",
             ft = "markdown"
-        }
+        },
+        bigfile = {
+            notify = true,
+        },
+        indent = {
+        },
+        lazygit = {},
+        quickfile = {},
     },
     keys = {
         { "<leader>.", function() Snacks.scratch() end,        desc = "Toggle Scratch Buffer" },
         { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-    }
+        { "<leader>gb", function()
+            Snacks.git.blame_line({})
+        end },
+        {
+            "<leader>I", function()
+            Snacks.indent.enable()
+            Snacks.indent.animate()
+        end
+        },
+        {
+            "<leader>gI", function()
+            Snacks.indent.disable()
+        end
+        },
+        {
+            "<leader>gl", function()
+            Snacks.lazygit.open({})
+        end
+        },
+    },
+    config = function()
+    end
 }

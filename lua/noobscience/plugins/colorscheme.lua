@@ -1,10 +1,23 @@
 return {
     {
         "loctvl842/monokai-pro.nvim",
-        -- priority = 1000,
-        -- config = function()
-        --     vim.cmd([[colorscheme monokai-pro-spectrum]])
-        -- end
+        priority = 1000,
+        config = function()
+            require("monokai-pro").setup({
+                transparent_background = true,
+                filter = "spectrum",
+                background_clear = {
+                    "telescope",
+                    "which-key",
+                    "nvim-tree",
+                    "bufferline",
+                    "float_win",
+                    "renamer",
+                    "toggleterm",
+                }
+            })
+            vim.cmd([[colorscheme monokai-pro-spectrum]])
+        end
     },
     {
         'projekt0n/github-nvim-theme',
@@ -39,15 +52,17 @@ return {
         "folke/tokyonight.nvim",
         -- priority = 1000,
         -- config = function()
-        --   -- vim.opt.background = 'light'
-        --   require("tokyonight").setup({
-        --     -- transparent = true,
-        --     styles = {
-        --       comments = { italic = true },
-        --       keywords = { italic = true },
-        --     },
-        --   })
-        --   vim.cmd([[colorscheme tokyonight-night]])
+        --     -- vim.opt.background = 'light'
+        --     require("tokyonight").setup({
+        --         transparent = true,
+        --         styles = {
+        --             comments = { italic = true },
+        --             keywords = { italic = true },
+        --             sidebars = "dark",
+        --             floats = "dark",
+        --         },
+        --     })
+        --     vim.cmd([[colorscheme tokyonight-night]])
         -- end
     },
     {
@@ -69,20 +84,20 @@ return {
         "rose-pine/neovim",
         name = "rose-pine",
         priority = 1000,
-        config = function()
-            -- require("rose-pine").setup({
-            --     variant = "auto",
-            --     dark_variant = "main",
-            --     dim_inactive_windows = false,
-            --     extend_background_behind_borders = true,
-            --     styles = {
-            --         bold = false,
-            --         italic = false,
-            --         transparency = false,
-            --     }
-            -- })
-            -- vim.cmd([[colorscheme rose-pine]])
-        end
+        -- config = function()
+        --     require("rose-pine").setup({
+        --         variant = "auto",
+        --         dark_variant = "main",
+        --         dim_inactive_windows = false,
+        --         extend_background_behind_borders = true,
+        --         styles = {
+        --             bold = false,
+        --             italic = false,
+        --             transparency = true,
+        --         }
+        --     })
+        --     vim.cmd([[colorscheme rose-pine]])
+        -- end
     },
     {
         'NLKNguyen/papercolor-theme'
