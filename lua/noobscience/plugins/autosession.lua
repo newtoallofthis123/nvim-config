@@ -6,4 +6,5 @@ return {
             auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
         }
     end,
+    -- enabled = false
 }

@@ -18,6 +18,8 @@ return
         },
         lazygit = {},
         quickfile = {},
+        terminal = {
+        }
     },
     keys = {
         { "<leader>.", function() Snacks.scratch() end,        desc = "Toggle Scratch Buffer" },
@@ -41,6 +43,11 @@ return
             Snacks.lazygit.open({})
         end
         },
+        {
+            "<C-w>t", function()
+            Snacks.terminal.toggle('fish')
+        end
+        }
     },
     config = function()
     end

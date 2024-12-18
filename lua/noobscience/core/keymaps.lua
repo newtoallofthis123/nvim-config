@@ -66,11 +66,18 @@ vim.keymap.set('n', '<C-t>l', ':tabNext<CR>', { desc = 'Move to the next tab' })
 vim.keymap.set('n', '<C-t>h', ':tabprevious<CR>', { desc = 'Move to the previous tab' })
 vim.keymap.set('n', '<C-t><C-t>', ':tabnew<CR>', { desc = 'Create a new tab' })
 
+local new_t = function()
+    vim.cmd('tabnew')
+    vim.cmd('term')
+end
+
+vim.keymap.set('n', '<C-t>t', new_t, { desc = 'Open a new terminal tab' })
+
+vim.keymap.set('n', '<leader>st', ':term<CR>', { desc = 'Open a terminal' })
+
 vim.keymap.set('n', '<leader>go', ':!qit o<CR>', { desc = 'Open Git Repo in the browser' })
 
-vim.keymap.set('n', '<leader>q', '<cmd>copen<CR>zz', { desc = 'Open the quick list buffer' })
-vim.keymap.set('n', '<leader>;', '<cmd>cnext<CR>zz', { desc = 'Next item in quickfix list' })
-vim.keymap.set('n', '<leader>h', '<cmd>lnext<CR>zz', { desc = 'Next item in location list' })
-
+vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>zz', { desc = 'Open the quick list buffer' })
+vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>zz', { desc = 'Next item in quickfix list' })
 
 vim.keymap.set('n', '<leader>rf', ':!zellij run -f', { desc = 'Run in Zellij Floating window' })

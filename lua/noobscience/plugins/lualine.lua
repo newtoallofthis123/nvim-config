@@ -208,6 +208,7 @@ return {
         ins_left {
             'filename',
             cond = conditions.buffer_not_empty,
+            color = { fg = colors.black, gui = 'bold',bg=colors.yellow },
         }
 
         ins_left { 'location' }

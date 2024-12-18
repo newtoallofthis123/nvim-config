@@ -6,6 +6,10 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
 
+-- terminal options
+vim.opt.shell = "/usr/bin/fish"
+vim.opt.shellcmdflag = "-c"
+
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
@@ -50,4 +54,4 @@ vim.filetype.add({
   },
 })
 
-vim.cmd([[colorscheme retrobox]])
+-- vim.cmd([[colorscheme retrobox]])

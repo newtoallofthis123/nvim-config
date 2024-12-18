@@ -14,56 +14,56 @@ return {
         'onsails/lspkind.nvim'
     },
     -- Autocompletion
-    {
-        'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
-        dependencies = {
-            { 'L3MON4D3/LuaSnip' },
-        },
-        config = function()
-            -- Here is where you configure the autocompletion settings.
-            local lsp_zero = require('lsp-zero')
-            lsp_zero.extend_cmp()
-            local cmp_mappings = lsp_zero.defaults.cmp_mappings()
-            cmp_mappings['<Tab>'] = nil
-            cmp_mappings['<S-Tab>'] = nil
-            -- And you can configure cmp even more, if you want to.
-            local cmp = require('cmp')
-            local cmp_action = lsp_zero.cmp_action()
-            local lspkind = require('lspkind')
-            cmp.setup({
-                formatting = {
-                    format = lspkind.cmp_format({
-                        mode = 'symbol',
-                        maxwidth = 50,
-                        ellipsis_char = '...',
-                    })
-
-                },
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "path" },
-                    { name = "buffer" },
-                },
-                window = {
-                    border = "rounded",
-                },
-                completion = {
-                    border = "rounded",
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-k>"] = cmp.mapping.select_prev_item(),
-                    ["<C-j>"] = cmp.mapping.select_next_item(),
-                    ['<C-Space>'] = cmp.mapping.complete(),
-                    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-d>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-                    ['<CR>'] = cmp.mapping.confirm({ select = false }),
-                    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-                }),
-            })
-        end
-    },
+    -- {
+    --     'hrsh7th/nvim-cmp',
+    --     event = 'InsertEnter',
+    --     dependencies = {
+    --         { 'L3MON4D3/LuaSnip' },
+    --     },
+    --     config = function()
+    --         -- Here is where you configure the autocompletion settings.
+    --         local lsp_zero = require('lsp-zero')
+    --         lsp_zero.extend_cmp()
+    --         local cmp_mappings = lsp_zero.defaults.cmp_mappings()
+    --         cmp_mappings['<Tab>'] = nil
+    --         cmp_mappings['<S-Tab>'] = nil
+    --         -- And you can configure cmp even more, if you want to.
+    --         local cmp = require('cmp')
+    --         local cmp_action = lsp_zero.cmp_action()
+    --         local lspkind = require('lspkind')
+    --         cmp.setup({
+    --             formatting = {
+    --                 format = lspkind.cmp_format({
+    --                     mode = 'symbol',
+    --                     maxwidth = 50,
+    --                     ellipsis_char = '...',
+    --                 })
+    --
+    --             },
+    --             sources = {
+    --                 { name = "nvim_lsp" },
+    --                 { name = "path" },
+    --                 { name = "buffer" },
+    --             },
+    --             window = {
+    --                 border = "rounded",
+    --             },
+    --             completion = {
+    --                 border = "rounded",
+    --             },
+    --             mapping = cmp.mapping.preset.insert({
+    --                 ["<C-k>"] = cmp.mapping.select_prev_item(),
+    --                 ["<C-j>"] = cmp.mapping.select_next_item(),
+    --                 ['<C-Space>'] = cmp.mapping.complete(),
+    --                 ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    --                 ['<C-d>'] = cmp.mapping.scroll_docs(4),
+    --                 ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+    --                 ['<CR>'] = cmp.mapping.confirm({ select = false }),
+    --                 ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+    --             }),
+    --         })
+    --     end
+    -- },
     {
         "ray-x/go.nvim",
         dependencies = {
@@ -86,11 +86,14 @@ return {
         dependencies = {
             { 'hrsh7th/cmp-nvim-lsp' },
             { 'williamboman/mason-lspconfig.nvim' },
+            { 'saghen/blink.cmp' }
         },
         config = function()
             -- This is where all the LSP shenanigans will live
             local lsp_zero = require('lsp-zero')
             lsp_zero.extend_lspconfig()
+
+            local capabilities = require('blink.cmp').get_lsp_capabilities()
 
 
             vim.filetype.add({ extension = { mdx = 'mdx' } })
@@ -107,8 +110,6 @@ return {
                 filetypes = { "ocaml", "ocaml.menhir", "ocaml.interface", "ocaml.ocamllex", "reason", "dune" },
                 root_dir = lsp_config.util.root_pattern("*.opam", "esy.json", "package.json", ".git", "dune-project",
                     "dune-workspace"),
-                on_attach = on_attach,
-                capabilities = capabilities
             })
 
             -- C++ LSP
@@ -138,7 +139,7 @@ return {
                     },
                 }
             })
-            
+
             -- Tailwind LSP
             lsp_config.tailwindcss.setup({
                 on_attach = on_attach,
