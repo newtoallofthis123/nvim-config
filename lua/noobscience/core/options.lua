@@ -15,7 +15,7 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
--- vim.opt.colorcolumn = "80"
+-- vim.opt.colorcolumn = "90"
 -- vim.o.clipboard = "unnamedplus"
 
 vim.cmd("set number")
@@ -33,25 +33,22 @@ vim.cmd("set path+=**")
 vim.cmd("set wildmenu")
 vim.cmd("set wildignore+=**/.git/**")
 
-vim.api.nvim_create_autocmd('TextYankPost', {
-    desc = 'Highlight when yanking (copying) text',
-    group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-})
-
--- Autocmd to persist undo tree on Neovim exit
-vim.api.nvim_create_autocmd("VimLeavePre", {
-  callback = function()
-    vim.cmd("UndotreePersistUndo")
-  end
-})
-
 vim.filetype.add({
-  pattern = {
-    ['.*%.blade%.php'] = 'blade',
-  },
+    pattern = {
+        ['.*%.blade%.php'] = 'blade',
+    },
 })
 
--- vim.cmd([[colorscheme retrobox]])
+vim.cmd([[colorscheme retrobox]])
+
+vim.api.nvim_create_user_command("E", function(opts)
+    local path = vim.fn.expand(opts.args)
+    local dir = vim.fn.fnamemodify(path, ":h")
+    if vim.fn.isdirectory(dir) == 0 then
+        vim.fn.mkdir(dir, "p")
+    end
+    vim.cmd("edit " .. path)
+end, { nargs = 1, complete = "file" })
+
+-- For dark mode by default
+vim.opt.background = 'dark'

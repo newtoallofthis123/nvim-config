@@ -10,20 +10,22 @@ return {
         -- Color table for highlights
         -- stylua: ignore
         -- Gruvbox
-        -- local colors = {
-        --     bg       = nil,       -- Muted dark gray for background
-        --     fg       = '#ebdbb2', -- Soft beige for foreground
-        --     yellow   = '#d79921', -- Muted yellow
-        --     cyan     = '#689d6a', -- Vintage teal green
-        --     darkblue = '#458588', -- Muted deep blue
-        --     green    = '#98971a', -- Olive green
-        --     orange   = '#d65d0e', -- Rustic orange
-        --     violet   = '#b16286', -- Muted violet
-        --     magenta  = '#d3869b', -- Soft magenta
-        --     blue     = '#83a598', -- Vintage blue
-        --     red      = '#e0241d', -- Brick red
-        -- }
-        --
+        local colors = {
+            bg       = nil,       -- Muted dark gray for background
+            fg       = '#ebdbb2', -- Soft beige for foreground
+            yellow   = '#d79921', -- Muted yellow
+            cyan     = '#689d6a', -- Vintage teal green
+            darkblue = '#458588', -- Muted deep blue
+            green    = '#98971a', -- Olive green
+            orange   = '#d65d0e', -- Rustic orange
+            violet   = '#b16286', -- Muted violet
+            magenta  = '#d3869b', -- Soft magenta
+            blue     = '#83a598', -- Vintage blue
+            red      = '#e0241d', -- Brick red
+            black    = '#1a1a1a'
+        }
+
+
         -- local colors = {
         --     bg       = nil, -- White for background
         --     fg       = '#24292e', -- Dark gray for foreground (default text)
@@ -36,6 +38,23 @@ return {
         --     magenta  = '#cf222e', -- Light magenta-pink
         --     blue     = '#0969da', -- Standard blue
         --     red      = '#cf222e', -- Bright red (used for errors)
+        -- }
+
+
+        -- Rosepine
+        -- local colors = {
+        --     bg       = nil,       -- White for background
+        --     fg       = '#e0def4', -- Dark gray for foreground (default text)
+        --     yellow   = '#f6c177', -- Bright yellow
+        --     cyan     = '#ebbcba', -- Cyan-blue
+        --     darkblue = '#9ccfd8', -- Deep blue
+        --     green    = '#31748f', -- Green (used for success)
+        --     orange   = '#f6c177', -- Vibrant orange
+        --     violet   = '#c4a7e7', -- Purple-violet
+        --     magenta  = '#c4a7e7', -- Light magenta-pink
+        --     blue     = '#9ccfd8', -- Standard blue
+        --     red      = '#eb6f92', -- Bright red (used for errors)
+        --     black    = '#191724'
         -- }
 
         -- Rosepine dawn
@@ -53,19 +72,20 @@ return {
         --     red      = '#eb6f92', -- Rose red
         -- }
 
-        local colors = {
-            bg       = nil,       -- Background (soft dark background, typically transparent)
-            fg       = '#e0def4', -- Soft, off-white for the foreground text
-            yellow   = '#F0DA61', -- Warm amber yellow
-            cyan     = '#59D3E6', -- Muted cyan
-            darkblue = '#31748f', -- Deep teal blue
-            green    = '#77D18A', -- Gentle sage green
-            orange   = '#FA9151', -- Muted peachy orange
-            violet   = '#9389E3', -- Subtle lavender violet
-            blue     = '#3e8fb0', -- Muted sky blue
-            red      = '#FC608C', -- Rose red
-            black    = '#1a1a1a',
-        }
+        -- Monokai
+        -- local colors = {
+        --     bg       = nil,       -- Background (soft dark background, typically transparent)
+        --     fg       = '#e0def4', -- Soft, off-white for the foreground text
+        --     yellow   = '#F0DA61', -- Warm amber yellow
+        --     cyan     = '#59D3E6', -- Muted cyan
+        --     darkblue = '#31748f', -- Deep teal blue
+        --     green    = '#77D18A', -- Gentle sage green
+        --     orange   = '#FA9151', -- Muted peachy orange
+        --     violet   = '#9389E3', -- Subtle lavender violet
+        --     blue     = '#3e8fb0', -- Muted sky blue
+        --     red      = '#FC608C', -- Rose red
+        --     black    = '#1a1a1a',
+        -- }
 
         -- local colors = {
         --     bg       = '#1a1b26', -- Deep dark blue (Tokyo Night background)
@@ -79,6 +99,21 @@ return {
         --     magenta  = '#bb9af7', -- Bright magenta
         --     blue     = '#7aa2f7', -- Bright blue
         --     red      = '#f7768e', -- Soft red
+        -- }
+
+        -- Moonfly
+        -- local colors = {
+        --     bg = "#080808",
+        --     fg = "#bdbdbd",
+        --     black = "#1c1c1c",
+        --     red = "#e65e72",
+        --     green = "#8cc85f",
+        --     yellow = "#e3c78a",
+        --     blue = "#80a0ff",
+        --     magenta = "#cf87e8",
+        --     cyan = "#79dac8",
+        --     white = "#c6c6c6",
+        --     orange = "#f78c6c",
         -- }
 
 
@@ -173,8 +208,8 @@ return {
             color = function()
                 -- auto change color according to neovims mode
                 local mode_color = {
-                    n = colors.red,
-                    i = colors.green,
+                    n = colors.orange,
+                    i = colors.yellow,
                     v = colors.blue,
                     [''] = colors.blue,
                     V = colors.blue,
@@ -208,7 +243,7 @@ return {
         ins_left {
             'filename',
             cond = conditions.buffer_not_empty,
-            color = { fg = colors.black, gui = 'bold',bg=colors.yellow },
+            color = { fg = colors.fg, gui = 'bold', bg = colors.bg },
         }
 
         ins_left { 'location' }
@@ -254,23 +289,22 @@ return {
                 msg = lsp.sub(lsp, 1, #lsp - 2)
                 return msg
             end,
-            color = { fg = colors.cyan },
+            color = { fg = colors.green },
+        }
+
+        ins_right {
+            'hostname',
+            icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+            color = { fg = colors.red, gui = 'bold' },
         }
 
         -- Add components to right sections
         ins_right {
-            'progress',       -- option component same as &encoding in viml
+            'progress',         -- option component same as &encoding in viml
             fmt = string.upper, -- I'm not sure why it's upper case either ;)
             cond = conditions.hide_in_width,
             color = { fg = colors.green, gui = 'bold' },
         }
-
-        -- ins_right {
-        --     '',
-        --     fmt = string.upper,
-        --     icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-        --     color = { fg = colors.green, gui = 'bold' },
-        -- }
 
         ins_right {
             'branch',
@@ -291,7 +325,7 @@ return {
 
         -- ins_right {
         --     function()
-        --         return ''
+        --         return require('codeium.virtual_text').status_string()
         --     end,
         --     color = { fg = colors.blue },
         --     padding = { left = 1 },

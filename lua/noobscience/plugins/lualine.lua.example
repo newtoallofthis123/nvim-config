@@ -1,0 +1,128 @@
+return {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+        local lualine = require("lualine")
+
+        local colors = {
+            bg       = nil,       -- Background (soft dark background, typically transparent)
+            fg       = '#e0def4', -- Soft, off-white for the foreground text
+            yellow   = '#F0DA61', -- Warm amber yellow
+            cyan     = '#59D3E6', -- Muted cyan
+            darkblue = '#31748f', -- Deep teal blue
+            green    = '#77D18A', -- Gentle sage green
+            orange   = '#FA9151', -- Muted peachy orange
+            violet   = '#9389E3', -- Subtle lavender violet
+            blue     = '#3e8fb0', -- Muted sky blue
+            red      = '#FC608C', -- Rose red
+            black    = '#1a1a1a',
+        }
+
+        local config = {
+            options = {
+                component_separators = '',
+                section_separators = '',
+                theme = {
+                    normal = { c = { fg = colors.fg, bg = colors.bg } },
+                    inactive = { c = { fg = colors.fg, bg = colors.bg } },
+                },
+            },
+            sections = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_y = {},
+                lualine_z = {},
+                lualine_c = {},
+                lualine_x = {},
+            },
+            inactive_sections = {
+                lualine_a = {},
+                lualine_b = {},
+                lualine_y = {},
+                lualine_z = {},
+                lualine_c = {},
+                lualine_x = {},
+            },
+
+        }
+
+        local function ins_left(component)
+            table.insert(config.sections.lualine_c, component)
+        end
+
+        local function ins_right(component)
+            table.insert(config.sections.lualine_x, component)
+        end
+
+        ins_left {
+            function()
+                local mode = vim.fn.mode()
+                local res = ''
+                if mode == 'n' then
+                    res = res .. 'NOR'
+                elseif mode == 'i' then
+                    res = res .. 'INS'
+                elseif mode == 'R' then
+                    res = res .. 'REP'
+                elseif mode == 'v' or mode == 'V' or mode == '^V' then
+                    res = res .. 'VIS'
+                end
+                return res
+            end,
+            color = function()
+                local mode = vim.fn.mode()
+                local color = colors.fg
+                if mode == 'n' then
+                    color = colors.green
+                elseif mode == 'i' then
+                    color = colors.blue
+                elseif mode == 'R' then
+                    color = colors.red
+                elseif mode == 'v' or mode == 'V' or mode == '^V' then
+                    color = colors.orange
+                end
+
+                return {bg=color, fg = colors.black}
+            end,
+            padding = { left = 2, right = 2 },
+        }
+
+        ins_left {
+            'filesize'
+        }
+
+        ins_left {
+            'filename',
+            color = { fg = colors.black, bg = colors.yellow },
+        }
+
+        ins_left{
+            function ()
+                return '%='
+            end
+        }
+
+        ins_left {
+            function ()
+                local msg = '||'
+                local ft = vim.api.nvim_get_option_value('filetype', {buf = 0})
+                local clients = vim.lsp.get_client()
+                if next(clients) == nil then
+                    return msg
+                end
+                local lsp = ''
+                for _, client in ipairs(clients) do
+                    local buf_ft = client.config.filetypes
+                    if buf_ft and vim.fn.index(buf_ft, ft) ~= -1 then
+                        lsp = lsp .. client.name .. ', '
+                    end
+                end
+                msg = lsp.sub(lsp, 1, #lsp - 2)
+                return msg
+            end,
+            color = {fg=colors.cyan}
+        }
+
+        lualine.setup(config)
+    end,
+}

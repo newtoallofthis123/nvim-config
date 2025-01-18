@@ -17,7 +17,9 @@ return
         indent = {
         },
         lazygit = {},
-        quickfile = {},
+        quickfile = {
+            enabled = false
+        },
         terminal = {
         }
     },
@@ -30,7 +32,6 @@ return
         {
             "<leader>I", function()
             Snacks.indent.enable()
-            Snacks.indent.animate()
         end
         },
         {

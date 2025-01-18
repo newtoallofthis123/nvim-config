@@ -3,7 +3,6 @@ return {
     branch = "0.1.x",
     dependencies = {
         "nvim-lua/plenary.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
@@ -17,14 +16,24 @@ return {
                     enable_preview = true,
                 },
                 find_files = {
-                    theme = 'ivy'
+                    theme = 'dropdown'
                 },
                 buffers = {
-                    theme = 'ivy'
+                    theme = 'dropdown'
                 },
+                live_grep = {
+                    theme = 'dropdown',
+                    find_command = 'rg,--ignore,--hidden,--files prompt_prefix=🔍'
+                }
             },
+
             extensions = {
-                fzf = {}
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+                }
             },
             defaults = {
                 path_display = { "truncate " },
@@ -40,10 +49,10 @@ return {
         })
 
         telescope.load_extension("emoji")
+        telescope.load_extension('fzf')
 
         -- set keymaps
         local keymap = vim.keymap -- for conciseness
-        local cwd = vim.fn.getcwd()
 
         keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
         keymap.set("n", "<leader>w", "<cmd>Telescope frecency", { desc = "Fuzzy find recent files" })
@@ -52,5 +61,7 @@ return {
         keymap.set("n", "<leader>fg", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
         keymap.set("n", "<leader>fe", "<cmd>Telescope emoji<cr>", { desc = "Find emoji" })
         keymap.set("n", "<leader>xx", "<cmd>TodoTelescope<cr>", { desc = "Todo Telescope" })
+        keymap.set("n", "<leader>fo", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", { desc = "Work space signals" })
+        keymap.set("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Select from register" })
     end,
 }

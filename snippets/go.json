@@ -1,0 +1,1 @@
+{"gHandle":{"body":["func (s *Server) handle${1:}(c *gin.Context) {","    ${2:}","}"],"prefix":"gHandle"},"ginErr":{"prefix":"ginErr","body":"c.JSON(500, gin.H{\"err\": \"${1:}\"})"}}

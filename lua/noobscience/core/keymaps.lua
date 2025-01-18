@@ -18,6 +18,13 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]])
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+vim.keymap.set({"n", "v"}, "<leader>x", [["_d]])
+vim.keymap.set("n", "<leader>ra", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set('n', '<C-S>', vim.cmd.w)
 
@@ -71,7 +78,16 @@ local new_t = function()
     vim.cmd('term')
 end
 
+local h_t = function ()
+    vim.cmd('split')
+    vim.cmd('wincmd r')
+    vim.cmd('wincmd h')
+    vim.cmd('wincmd 6-')
+    vim.cmd('term')
+end
+
 vim.keymap.set('n', '<C-t>t', new_t, { desc = 'Open a new terminal tab' })
+vim.keymap.set('n', '<C-t>h', h_t, { desc = 'Open a terminal in a horizontal split' })
 
 vim.keymap.set('n', '<leader>st', ':term<CR>', { desc = 'Open a terminal' })
 
@@ -81,3 +97,6 @@ vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>zz', { desc = 'Open the quick list b
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>zz', { desc = 'Next item in quickfix list' })
 
 vim.keymap.set('n', '<leader>rf', ':!zellij run -f', { desc = 'Run in Zellij Floating window' })
+vim.keymap.set('n', '<leader>t', ':Ex<CR>', { desc = 'Open Netrw' })
+vim.keymap.set('n', '<leader>cce', ':Copilot enable<CR>', { desc = 'Enable Copilot' })
+vim.keymap.set('n', '<leader>ccw', ':Copilot disable<CR>', { desc = 'Disable Copilot' })

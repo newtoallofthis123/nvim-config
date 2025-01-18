@@ -1,8 +1,22 @@
-return {
-    'github/copilot.vim',
-    event = "VimEnter",
-    init = function()
-        vim.g.copilot_workspace_folders = { vim.fn.getcwd() }
-    end
-    -- enabled = false,
-}
+return { {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+        require("copilot").setup({
+            suggestion = {
+                enabled = false,
+                keymap = {
+                    accept = "<C-'>",
+                    accept_word = "<C-y>",
+                    next = "<C-]>",
+                    prev = "<C-[>",
+                },
+            },
+            panel = { enabled = false },
+        })
+
+        vim.cmd([[Copilot disable]])
+    end,
+    -- enabled = false
+} }

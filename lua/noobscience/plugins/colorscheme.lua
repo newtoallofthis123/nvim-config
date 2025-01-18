@@ -16,7 +16,36 @@ return {
                     "toggleterm",
                 }
             })
-            vim.cmd([[colorscheme monokai-pro-spectrum]])
+            -- vim.cmd([[colorscheme monokai-pro-spectrum]])
+        end
+    },
+    {
+        "ellisonleao/gruvbox.nvim",
+        priority = 1000,
+        config = function()
+            require("gruvbox").setup({
+                bold = false,
+                italic = {
+                    strings = false,
+                    emphasis = true,
+                    comments = true,
+                    operators = false,
+                    folds = false,
+                },
+                contrast = "hard", -- can be "hard", "soft" or empty string
+                palette_overrides = {},
+                overrides = {
+                    WhichKey = { bg = "NONE" },
+                    WhichKeyNormal = { bg = "NONE" },
+                    NormalFloat = { bg = "NONE" },
+                    BlinkCmpMenu = { bg = "NONE" },
+                    Pmenu = { bg = "NONE" },
+                    PmenuThumb = { bg = "NONE" }
+                },
+                dim_inactive = false,
+                transparent_mode = true,
+            })
+            vim.cmd("colorscheme gruvbox")
         end
     },
     {
@@ -84,23 +113,41 @@ return {
         "rose-pine/neovim",
         name = "rose-pine",
         priority = 1000,
-        -- config = function()
-        --     require("rose-pine").setup({
-        --         variant = "auto",
-        --         dark_variant = "main",
-        --         dim_inactive_windows = false,
-        --         extend_background_behind_borders = true,
-        --         styles = {
-        --             bold = false,
-        --             italic = false,
-        --             transparency = true,
-        --         }
-        --     })
-        --     vim.cmd([[colorscheme rose-pine]])
-        -- end
+        config = function()
+            require("rose-pine").setup({
+                variant = "auto",
+                dark_variant = "main",
+                dim_inactive_windows = false,
+                extend_background_behind_borders = true,
+                styles = {
+                    bold = true,
+                    italic = false,
+                    transparency = true,
+                },
+                highlight_groups = {
+                    TelescopeBorder = { fg = "highlight_high", bg = "none" },
+                    TelescopeNormal = { bg = "none" },
+                    TelescopePromptNormal = { bg = "base" },
+                    TelescopeResultsNormal = { fg = "subtle", bg = "none" },
+                    TelescopeSelection = { fg = "text", bg = "base" },
+                    TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
+                },
+            })
+            -- vim.cmd([[colorscheme rose-pine]])
+        end
     },
     {
         'NLKNguyen/papercolor-theme'
+    },
+    {
+        'rebelot/kanagawa.nvim',
+        config = function()
+            require('kanagawa').setup({
+                transparent = true,
+                terminalColors = true,
+                theme = "wave",
+            })
+        end
     },
     {
         "EdenEast/nightfox.nvim",
@@ -109,4 +156,35 @@ return {
         --     vim.cmd([[colorscheme duskfox]])
         -- end
     },
+    {
+        "bluz71/vim-moonfly-colors",
+        name = "moonfly",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            -- vim.cmd([[colorscheme moonfly]])
+        end
+    },
+    {
+        'rafi/awesome-vim-colorschemes'
+    },
+
+    {
+        "jackplus-xyz/binary.nvim",
+        opts = {
+            colors = {          -- Colors used for the "light" theme; reversed automatically for "dark"
+                bg = "#d79921", -- Foreground color
+                fg = "#000000", -- Background color
+            },
+        }
+    },
+    {
+        "nickkadutskyi/jb.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function()
+            -- require("jb").setup({transparent = true})
+        end,
+    }
 }
