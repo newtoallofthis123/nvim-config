@@ -16,15 +16,15 @@ return {
                     enable_preview = true,
                 },
                 find_files = {
-                    theme = 'dropdown'
+                    theme = 'ivy'
                 },
                 buffers = {
-                    theme = 'dropdown'
+                    theme = 'ivy'
                 },
                 live_grep = {
-                    theme = 'dropdown',
+                    theme = 'ivy',
                     find_command = 'rg,--ignore,--hidden,--files prompt_prefix=🔍'
-                }
+                },
             },
 
             extensions = {
@@ -55,7 +55,7 @@ return {
         local keymap = vim.keymap -- for conciseness
 
         keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Fuzzy find files in cwd" })
-        keymap.set("n", "<leader>w", "<cmd>Telescope frecency", { desc = "Fuzzy find recent files" })
+        keymap.set("n", "<leader>fw", "<cmd>Telescope frecency<cr>", { desc = "Fuzzy find recent files" })
         keymap.set("n", "<leader>e", "<cmd>Telescope buffers<cr>", { desc = "Fuzzy find recent files" })
         keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>", { desc = "Find string in cwd" })
         keymap.set("n", "<leader>fg", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })

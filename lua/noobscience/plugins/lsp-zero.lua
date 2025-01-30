@@ -88,20 +88,21 @@ return {
             })
 
             -- C++ LSP
-            lsp_config.clangd.setup {
-                on_attach = function(client, bufnr)
-                    client.server_capabilities.signatureHelpProvider = false
-                    on_attach(client, bufnr)
-                end,
-                capabilities = capabilities,
-                cmd = {
-                    "clangd",
-                    "--clang-tidy",
-                    "--background-index",
-                    "--clang-flag=-std=c++20"
-                },
-            }
-
+            -- lsp_config.clangd.setup {
+            --     on_attach = function(client, bufnr)
+            --         client.server_capabilities.signatureHelpProvider = false
+            --         on_attach(client, bufnr)
+            --     end,
+            --     capabilities = capabilities,
+            --     filetypes = { "c", "cpp", "h" },
+            --     cmd = {
+            --         "clangd",
+            --         "--clang-tidy",
+            --         "--background-index",
+            --         "--clang-flag=-std=c++20"
+            --     },
+            -- }
+            --
             -- Zig Lsp
             lsp_config.zls.setup({
                 settings = {
@@ -121,17 +122,6 @@ return {
                 capabilities = capabilities,
                 filetypes = { "templ", "astro", "javascript", "typescript", "react" },
                 init_options = { userLanguages = { templ = "html" } },
-            })
-
-            -- Pyright Lsp
-            lsp_config.pyright.setup({
-                settings = {
-                    python = {
-                        analysis = {
-                            typeCheckingMode = "off",
-                        }
-                    }
-                }
             })
 
             lsp_config.emmet_ls.setup({
@@ -162,6 +152,8 @@ return {
                 cmd = { "bundle", "exec", "rubocop", "--lsp" },
                 root_dir = lsp_config.util.root_pattern("Gemfile", ".git", "."),
             })
+
+            lsp_config.protols.setup {}
 
             local keymap = vim.keymap
 
@@ -222,6 +214,35 @@ return {
                             capabilities
                     })
                 end,
+                ["clangd"] = function()
+                    require("lspconfig")["clangd"].setup({
+                        on_attach = function(client, bufnr)
+                            local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+                            if filetype == 'proto' then
+                                client.stop() -- Stop clangd for .proto files
+                            end
+                        end,
+                    })
+                end,
+                ["basedpyright"] = function()
+                    require("lspconfig")["basedpyright"].setup({
+                        capabilities = capabilities,
+                        settings = {
+                            basedpyright = {
+                                analysis = {
+                                    typeCheckingMode = "basic",
+                                    diagnosticMode = "workspace",
+                                    inlayHints = {
+                                        variableTypes = false,
+                                        callArgumentNames = true,
+                                        functionReturnTypes = true,
+                                        genericTypes = false
+                                    }
+                                },
+                            },
+                        },
+                    })
+                end,
                 --
                 -- ["gopls"] = function()
                 --     require("go").setup()
@@ -234,6 +255,11 @@ return {
                     require('go.format').goimports()
                 end,
                 group = format_sync_grp,
+            })
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = 'proto',
+                callback = function()
+                end,
             })
         end
     }

@@ -3,20 +3,15 @@ return {
     event = 'VeryLazy',
     config = function()
         require('tmux-compile').setup({
-            save_session = false,         -- Save file before action (:wall)
-            build_run_window_title = "build", -- Tmux window name for Build/Run
+            save_session = true,
+            build_run_window_title = "build", 
             ---- same window pane
             new_pane_everytime = false,   -- Use existing side panes for action, when false
             side_width_percent = 50,      -- Side pane width percentage
             bottom_height_percent = 30,   -- Bottom pane height percentage
-            ---- overlay window
             overlay_width_percent = 80,   -- Overlay width percentage
             overlay_height_percent = 80,  -- Overlay height percentage
-            overlay_sleep = 1,            -- Pause before overlay autoclose; seconds
-            -- By default it sets value to -1,
-            -- indicating not to autoclose overlay
-
-            -- Languages' Run and Build actions.  [REQUIRED]
+            overlay_sleep = 3,            -- Pause before overlay autoclose; seconds
             build_run_config = {
                 {
                     extension = { 'c', 'cpp', 'h' },
@@ -28,14 +23,11 @@ return {
                     extension = { 'rs' },
                     build = 'cargo build',
                     run = 'cargo run',
-                    -- not all properties are required for all extensions
                 },
                 {
                     extension = { 'go' },
-                    run = 'go run .',
-                    -- Run would work for golang
-                    -- but Build and Debug will return errors informing configs are
-                    -- missing
+                    run = 'make run',
+                    build = 'make build',
                 }, {
                 extension = { 'java' },
                 run = '/opt/gradle/gradle-8.11.1/bin/gradle build'
@@ -45,8 +37,12 @@ return {
 
         local keymap = vim.keymap -- for conciseness
 
-        keymap.set("n", "<leader>rb", "<cmd>TMUXcompile Make<cr>", { desc = "Make in a tmux window" })
-        keymap.set("n", "<leader>rr", "<cmd>TMUXcompile Run<cr>", { desc = "Run in a tmux window" })
+        keymap.set("n", "<leader>rvb", "<cmd>TMUXcompile MakeV<cr>", { desc = "Make in a tmux vertical window" })
+        keymap.set("n", "<leader>rvr", "<cmd>TMUXcompile RunV<cr>", { desc = "Run in a tmux vertical window" })
+        keymap.set("n", "<leader>rhb", "<cmd>TMUXcompile MakeH<cr>", { desc = "Make in a tmux horizontal window" })
+        keymap.set("n", "<leader>rhr", "<cmd>TMUXcompile RunH<cr>", { desc = "Run in a tmux horizontal window" })
+        keymap.set("n", "<leader>rB", "<cmd>TMUXcompile MakeBG<cr>", { desc = "Make in a new tmux window" })
+        keymap.set("n", "<leader>rR", "<cmd>TMUXcompile RunBG<cr>", { desc = "Run in a new tmux window" })
     end,
     enable = false,
 }

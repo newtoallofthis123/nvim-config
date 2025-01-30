@@ -180,11 +180,11 @@ return {
     },
     {
         "nickkadutskyi/jb.nvim",
-        lazy = false,
-        priority = 1000,
-        opts = {},
-        config = function()
-            -- require("jb").setup({transparent = true})
-        end,
+    },
+    {
+        "xero/miasma.nvim",
+    },
+    {
+        "Yazeed1s/oh-lucy.nvim"
     }
 }
