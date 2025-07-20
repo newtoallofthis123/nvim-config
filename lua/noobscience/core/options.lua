@@ -7,7 +7,7 @@ vim.opt.smartindent = true
 vim.opt.wrap = false
 
 -- terminal options
-vim.opt.shell = "/usr/bin/fish"
+vim.opt.shell = "/bin/zsh"
 vim.opt.shellcmdflag = "-c"
 
 vim.opt.hlsearch = false

@@ -16,7 +16,7 @@ return {
                     "toggleterm",
                 }
             })
-            -- vim.cmd([[colorscheme monokai-pro-spectrum]])
+            -- vim.cmd([[colorscheme monokai-pro]])
         end
     },
     {
@@ -45,7 +45,7 @@ return {
                 dim_inactive = false,
                 transparent_mode = true,
             })
-            vim.cmd("colorscheme gruvbox")
+            -- vim.cmd("colorscheme gruvbox")
         end
     },
     {
@@ -133,7 +133,7 @@ return {
                     TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
                 },
             })
-            -- vim.cmd([[colorscheme rose-pine]])
+            vim.cmd([[colorscheme rose-pine]])
         end
     },
     {
@@ -149,6 +149,23 @@ return {
             })
         end
     },
+    { 
+  'olivercederborg/poimandres.nvim',
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require('poimandres').setup {
+      -- leave this setup function empty for default config
+      -- or refer to the configuration section
+      -- for configuration options
+    }
+  end,
+
+   -- optionally set the colorscheme within lazy config
+   -- init = function()
+   --   vim.cmd("colorscheme poimandres")
+   -- end
+},
     {
         "EdenEast/nightfox.nvim",
         -- priority = 1000,

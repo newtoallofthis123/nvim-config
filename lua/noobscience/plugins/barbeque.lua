@@ -9,8 +9,8 @@ return {
     opts = {
     },
     config = function()
-        require("barbecue").setup()
-        vim.keymap.set("n", "<leader>[", function() require("barbecue.ui").toggle() end)
+        -- require("barbecue").setup()
+        -- vim.keymap.set("n", "<leader>[", function() require("barbecue.ui").toggle() end)
     end,
     enabled = false
 }

@@ -10,20 +10,35 @@ return {
         -- Color table for highlights
         -- stylua: ignore
         -- Gruvbox
-        local colors = {
-            bg       = nil,       -- Muted dark gray for background
-            fg       = '#ebdbb2', -- Soft beige for foreground
-            yellow   = '#d79921', -- Muted yellow
-            cyan     = '#689d6a', -- Vintage teal green
-            darkblue = '#458588', -- Muted deep blue
-            green    = '#98971a', -- Olive green
-            orange   = '#d65d0e', -- Rustic orange
-            violet   = '#b16286', -- Muted violet
-            magenta  = '#d3869b', -- Soft magenta
-            blue     = '#83a598', -- Vintage blue
-            red      = '#e0241d', -- Brick red
-            black    = '#1a1a1a'
-        }
+        -- local colors = {
+        --     bg       = nil,       -- Muted dark gray for background
+        --     fg       = '#ebdbb2', -- Soft beige for foreground
+        --     yellow   = '#d79921', -- Muted yellow
+        --     cyan     = '#689d6a', -- Vintage teal green
+        --     darkblue = '#458588', -- Muted deep blue
+        --     green    = '#98971a', -- Olive green
+        --     orange   = '#d65d0e', -- Rustic orange
+        --     violet   = '#b16286', -- Muted violet
+        --     magenta  = '#d3869b', -- Soft magenta
+        --     blue     = '#83a598', -- Vintage blue
+        --     red      = '#e0241d', -- Brick red
+        --     black    = '#1a1a1a'
+        -- }
+
+--         local colors = {
+--     bg       = '#1b1e28', -- Dark blue-gray background
+--     fg       = '#a6accd', -- Soft purple-gray foreground
+--     yellow   = '#fffac2', -- Pale cream yellow
+--     cyan     = '#5de4c7', -- Bright mint cyan
+--     darkblue = '#89ddff', -- Light sky blue
+--     green    = '#5de4c7', -- Mint green (same as cyan)
+--     orange   = '#fcc5e9', -- Soft pink (closest to orange in palette)
+--     violet   = '#d0679d', -- Rose pink violet
+--     magenta  = '#d0679d', -- Rose pink magenta
+--     blue     = '#add7ff', -- Light blue
+--     red      = '#d0679d', -- Rose pink (no true red in poimanders)
+--     black    = '#1b1e28'  -- Same as background
+-- }
 
 
         -- local colors = {
@@ -42,20 +57,20 @@ return {
 
 
         -- Rosepine
-        -- local colors = {
-        --     bg       = nil,       -- White for background
-        --     fg       = '#e0def4', -- Dark gray for foreground (default text)
-        --     yellow   = '#f6c177', -- Bright yellow
-        --     cyan     = '#ebbcba', -- Cyan-blue
-        --     darkblue = '#9ccfd8', -- Deep blue
-        --     green    = '#31748f', -- Green (used for success)
-        --     orange   = '#f6c177', -- Vibrant orange
-        --     violet   = '#c4a7e7', -- Purple-violet
-        --     magenta  = '#c4a7e7', -- Light magenta-pink
-        --     blue     = '#9ccfd8', -- Standard blue
-        --     red      = '#eb6f92', -- Bright red (used for errors)
-        --     black    = '#191724'
-        -- }
+        local colors = {
+            bg       = nil,       -- White for background
+            fg       = '#e0def4', -- Dark gray for foreground (default text)
+            yellow   = '#f6c177', -- Bright yellow
+            cyan     = '#ebbcba', -- Cyan-blue
+            darkblue = '#9ccfd8', -- Deep blue
+            green    = '#31748f', -- Green (used for success)
+            orange   = '#f6c177', -- Vibrant orange
+            violet   = '#c4a7e7', -- Purple-violet
+            magenta  = '#c4a7e7', -- Light magenta-pink
+            blue     = '#9ccfd8', -- Standard blue
+            red      = '#eb6f92', -- Bright red (used for errors)
+            black    = '#191724'
+        }
 
         -- Rosepine dawn
         -- local colors = {
@@ -277,6 +292,10 @@ return {
                 local clients = vim.lsp.get_clients()
                 if next(clients) == nil then
                     return msg
+                end
+                
+                if buf_ft == 'elixir' then
+                    return '  ElixirLS'
                 end
                 local lsp = '  ';
                 for _, client in ipairs(clients) do

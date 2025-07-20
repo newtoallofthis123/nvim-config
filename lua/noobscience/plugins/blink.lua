@@ -1,6 +1,6 @@
 return { {
     'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets', 'giuxtaposition/blink-cmp-copilot' },
+    dependencies = { 'rafamadriz/friendly-snippets', 'giuxtaposition/blink-cmp-copilot'},
     version = 'v0.*',
     opts = {
         keymap = { preset = 'default' },
@@ -46,35 +46,39 @@ return { {
                 Operator = "󰆕",
                 TypeParameter = "󰅲",
                 Copilot = " ",
+                Supermaven = "N"
             },
         },
         sources = {
-            default = { 'lsp', 'path', 'snippets', 'buffer', 'copilot' },
+            default = { 'lsp', 'path', 'snippets', 'buffer'},
             providers = {
                 snippets = {
                     opts = {
                         search_paths = { vim.fn.stdpath("config") .. "/snippets", }
                     }
                 },
-                copilot = {
-                    name = "copilot",
-                    module = "blink-cmp-copilot",
-                    score_offset = 100,
-                    async = true,
-                    transform_items = function(_, items)
-                        local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
-                        local kind_idx = #CompletionItemKind + 1
-                        CompletionItemKind[kind_idx] = "Copilot"
-                        for _, item in ipairs(items) do
-                            item.kind = kind_idx
-                        end
-                        return items
-                    end,
-                },
+                -- copilot = {
+                --     name = "copilot",
+                --     module = "blink-cmp-copilot",
+                --     score_offset = 100,
+                --     async = true,
+                --     transform_items = function(_, items)
+                --         local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+                --         local kind_idx = #CompletionItemKind + 1
+                --         CompletionItemKind[kind_idx] = "Copilot"
+                --         for _, item in ipairs(items) do
+                --             item.kind = kind_idx
+                --         end
+                --         return items
+                --     end,
+                -- },
             },
         },
 
         signature = { enabled = true },
+        fuzzy = {
+            implementation = "prefer_rust"
+        }
     },
     opts_extend = { "sources.default" }
 },
