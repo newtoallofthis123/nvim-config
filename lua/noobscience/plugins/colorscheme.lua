@@ -159,6 +159,8 @@ return {
       -- or refer to the configuration section
       -- for configuration options
     }
+
+    -- vim.cmd([[colorscheme poimandres]])
   end,
 
    -- optionally set the colorscheme within lazy config

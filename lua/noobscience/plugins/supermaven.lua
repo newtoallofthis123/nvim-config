@@ -6,5 +6,5 @@ return {
             disable_keymaps = false
         })
     end,
-    -- enabled = false,
+    enabled = false,
 }
