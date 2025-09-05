@@ -16,13 +16,13 @@ return {
 					enable_preview = true,
 				},
 				find_files = {
-					-- theme = 'dropdown'
+					theme = 'ivy'
 				},
 				buffers = {
-					-- theme = 'dropdown'
+					theme = 'ivy'
 				},
 				live_grep = {
-					-- theme = 'dropdown',
+					theme = 'ivy',
 					find_command = "rg,--ignore,--hidden,--files prompt_prefix=🔍",
 				},
 			},

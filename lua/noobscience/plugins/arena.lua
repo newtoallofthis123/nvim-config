@@ -12,5 +12,5 @@ return {
         })
         vim.keymap.set("n", "<leader>a", function() require("arena").toggle() end)
     end,
-    enabled = false
+    -- enabled = false
 }

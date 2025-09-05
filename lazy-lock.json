@@ -77,8 +77,6 @@
   "rose-pine": { "branch": "main", "commit": "72befaffeac38db7bdd49e0549eaa2c4806dd878" },
   "rustaceanvim": { "branch": "master", "commit": "047f9c9d8cd2861745eb9de6c1570ee0875aa795" },
   "screenkey.nvim": { "branch": "main", "commit": "16390931d847b1d5d77098daccac4e55654ac9e2" },
-  "signup.nvim": { "branch": "main", "commit": "2b21a2aa51efbdeb9454a3f5d62659368d87d420" },
-  "slimline.nvim": { "branch": "main", "commit": "467f4132fc847b8969506ca94ecc5f7b5b672497" },
   "smear-cursor.nvim": { "branch": "main", "commit": "4b86df8a0c5f46e708616b21a02493bb0e47ecbd" },
   "snacks.nvim": { "branch": "main", "commit": "bc0630e43be5699bb94dadc302c0d21615421d93" },
   "snipe.nvim": { "branch": "main", "commit": "9e98df38f81cdf3822936c919c8115e9529a491a" },
