@@ -46,7 +46,7 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>ga', ':Git add %<CR>', { noremap = true })
-vim.api.nvim_set_keymap('n', '<leader>gc', ':Git commit<CR>', { noremap = true })
+-- vim.api.nvim_set_keymap('n', '<leader>gc', ':Git commit<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gp', ':Git push', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>gs', ':Git status<CR>', { noremap = true })
