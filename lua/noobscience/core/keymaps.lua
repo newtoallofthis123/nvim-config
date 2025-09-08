@@ -2,7 +2,14 @@ vim.g.mapleader = " "
 
 -- local keymap = vim.keymap
 
-vim.keymap.set("n", "<leader>d", function() vim.cmd('bd!') end)
+vim.keymap.set("n", "<leader>d", vim.cmd.bd, { desc = "Delete buffer" })
+-- vim.keymap.set("n", "<leader>d", function()
+-- 	if vim.fn.winnr('$') > 1 then
+-- 		vim.cmd('close')
+-- 	else
+-- 		vim.cmd('bd!')
+-- 	end
+-- end, { desc = "Close split or delete buffer if last window" })
 vim.keymap.set("n", "<leader>q", function() vim.cmd('close') end)
 vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 
@@ -50,6 +57,26 @@ vim.api.nvim_set_keymap('n', '<leader>ga', ':Git add %<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gp', ':Git push', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>gs', ':Git status<CR>', { noremap = true })
+vim.keymap.set('n', '<leader>gsc', function()
+    local branch_name = vim.fn.input('Branch name: ')
+    if branch_name ~= '' then
+        vim.cmd('Git switch -c ' .. branch_name)
+    end
+end, { desc = 'Create and switch to new branch' })
+-- TODO: Fix
+vim.keymap.set('n', '<leader>gpr', function()
+    local reviewers = vim.fn.input('Reviewers (comma-separated): ')
+    if reviewers ~= '' then
+        local reviewer_args = ''
+        for reviewer in reviewers:gmatch('([^,]+)') do
+            reviewer = reviewer:match('^%s*(.-)%s*$') -- trim whitespace
+            if reviewer ~= '' then
+                reviewer_args = reviewer_args .. ' --reviewer ' .. reviewer
+            end
+        end
+        vim.cmd('!gh pr create' .. reviewer_args .. ' --fill-first --head')
+    end
+end, { desc = 'Create PR with reviewers' })
 
 -- Some formatting keymaps
 vim.api.nvim_set_keymap('n', '<leader>fpy', ':!black %<CR>', { noremap = true })

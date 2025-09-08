@@ -3,21 +3,25 @@ return {
 	version = "*",
 	config = function()
 		require("focus").setup({
-			spilt = {
-				bufnew = true,
+			split = {
+				bufnew = false,
 			},
 			autoresize = {
 				enable = false,
 			},
 			ui = {
 				number = true,
-				-- relativenumber = true,
+				relativenumber = false,
+				cursorline = true,
+				signcolumn = true,
+				winhighlight = false,
 			},
 		})
+
 		local focusmap = function(direction)
 			vim.keymap.set("n", "<leader>w" .. direction, function()
 				require("focus").split_command(direction)
-			end, { desc = string.format("Create or move to split (%s)", direction) })
+			end, { desc = string.format("Create or move to %s split", direction) })
 		end
 
 		focusmap("h")
@@ -25,7 +29,29 @@ return {
 		focusmap("k")
 		focusmap("l")
 
-		vim.keymap.set("n", "<leader>w=", "<cmd>FocusEqualise<cr>", { desc = "Equalize Splits" })
-		vim.keymap.set("n", "<leader>w+", "<cmd>FocusMaximise<cr>", { desc = "Current Maximize Split" })
+		vim.keymap.set("n", "<leader>w=", "<cmd>FocusEqualise<cr>", { desc = "Equalize all splits" })
+		vim.keymap.set("n", "<leader>wm", "<cmd>FocusMaxOrEqual<cr>", { desc = "Toggle maximize/equalize split" })
+		
+		vim.keymap.set("n", "<leader>wo", "<cmd>FocusSplitCycle<cr>", { desc = "Cycle through splits" })
+		
+		vim.keymap.set("n", "<leader>wq", function()
+			if vim.fn.winnr('$') > 1 then
+				vim.cmd('close')
+			else
+				print("Cannot close last window")
+			end
+		end, { desc = "Close split (keep buffer)" })
+		
+		vim.keymap.set("n", "<leader>wk", function()
+			if vim.fn.winnr('$') > 1 then
+				local bufnr = vim.api.nvim_get_current_buf()
+				vim.cmd('close')
+				if vim.fn.buflisted(bufnr) == 1 and #vim.fn.getbufinfo(bufnr, {buflisted=1})[1].windows == 0 then
+					vim.cmd('bdelete ' .. bufnr)
+				end
+			else
+				print("Cannot close last window")
+			end
+		end, { desc = "Close split and kill buffer" })
 	end,
 }

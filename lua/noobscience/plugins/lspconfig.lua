@@ -8,6 +8,8 @@ return {
   config = function()
     local lspconfig = require("lspconfig")
     local capabilities = require("blink.cmp").get_lsp_capabilities()
+    capabilities.general = capabilities.general or {}
+    capabilities.general.positionEncodings = { 'utf-16' }
 
     local opts = { silent = true }
 
@@ -38,10 +40,10 @@ return {
     vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
 
     opts.desc = "Go to previous diagnostic"
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end, opts)
 
     opts.desc = "Go to next diagnostic"
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end, opts)
     opts.desc = "Smart rename"
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
     opts.desc = "See available code actions"
@@ -54,6 +56,24 @@ return {
     vim.keymap.set("n", "<leader>f", function()
       vim.lsp.buf.format({ async = true })
     end, opts)
+
+    lspconfig.lua_ls.setup({
+      capabilities = capabilities,
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+          workspace = {
+            library = vim.api.nvim_get_runtime_file("", true),
+            checkThirdParty = false,
+          },
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
+    })
 
     lspconfig.pyright.setup({
       capabilities = capabilities,
@@ -98,16 +118,17 @@ return {
 
     vim.diagnostic.config({
       virtual_text = true,
-      signs = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = " ",
+          [vim.diagnostic.severity.WARN] = " ",
+          [vim.diagnostic.severity.HINT] = " ",
+          [vim.diagnostic.severity.INFO] = " ",
+        }
+      },
       underline = true,
       update_in_insert = false,
       severity_sort = false,
     })
-
-    local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    end
   end,
 }
