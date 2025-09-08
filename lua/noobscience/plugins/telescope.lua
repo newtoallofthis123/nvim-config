@@ -16,13 +16,13 @@ return {
 					enable_preview = true,
 				},
 				find_files = {
-					-- theme = 'dropdown'
+					theme = 'ivy'
 				},
 				buffers = {
-					-- theme = 'dropdown'
+					theme = 'ivy'
 				},
 				live_grep = {
-					-- theme = 'dropdown',
+					theme = 'ivy',
 					find_command = "rg,--ignore,--hidden,--files prompt_prefix=🔍",
 				},
 			},
@@ -82,6 +82,9 @@ return {
 		telescope.load_extension("emoji")
 		-- telescope.load_extension('fzf')
 
+		-- Import custom telescope plugins
+		local custom_plugins = require("noobscience.custom-telescope-plugins")
+
 		-- set keymaps
 		local keymap = vim.keymap -- for conciseness
 
@@ -99,5 +102,7 @@ return {
 			{ desc = "Work space signals" }
 		)
 		keymap.set("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Select from register" })
+		keymap.set("n", "<leader>gw", custom_plugins.git_branch_picker, { desc = "Git branch picker" })
+		keymap.set("n", "<leader>gr", custom_plugins.git_branch_picker_with_stash, { desc = "Git branch picker (stash-switch-pop)" })
 	end,
 }

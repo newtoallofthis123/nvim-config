@@ -249,11 +249,11 @@ return {
             padding = { right = 2, left = 2, top = 2, bottom = 2 },
         }
 
-        ins_left {
-            -- filesize component
-            'filesize',
-            cond = conditions.buffer_not_empty,
-        }
+        -- ins_left {
+        --     -- filesize component
+        --     'filesize',
+        --     cond = conditions.buffer_not_empty,
+        -- }
 
         ins_left {
             'filename',
@@ -311,19 +311,19 @@ return {
             color = { fg = colors.green },
         }
 
-        ins_right {
-            'hostname',
-            icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-            color = { fg = colors.red, gui = 'bold' },
-        }
+        -- ins_right {
+        --     'hostname',
+        --     icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
+        --     color = { fg = colors.red, gui = 'bold' },
+        -- }
 
         -- Add components to right sections
-        ins_right {
-            'progress',         -- option component same as &encoding in viml
-            fmt = string.upper, -- I'm not sure why it's upper case either ;)
-            cond = conditions.hide_in_width,
-            color = { fg = colors.green, gui = 'bold' },
-        }
+        -- ins_right {
+        --     'progress',         -- option component same as &encoding in viml
+        --     fmt = string.upper, -- I'm not sure why it's upper case either ;)
+        --     cond = conditions.hide_in_width,
+        --     color = { fg = colors.green, gui = 'bold' },
+        -- }
 
         ins_right {
             'branch',
