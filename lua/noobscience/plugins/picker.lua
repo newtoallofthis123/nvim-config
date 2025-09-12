@@ -88,11 +88,11 @@ return {
       desc = "Find string in cwd",
     },
     {
-      "<leader>fg",
+      "<leader>fw",
       function()
         Snacks.picker.grep_word()
       end,
-      desc = "Find string under cursor in cwd",
+      desc = "Find word under cursor in cwd",
     },
 
     -- LSP operations
