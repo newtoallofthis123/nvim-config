@@ -72,7 +72,7 @@ return {
         mappings = {
           i = {
             ["<C-k>"] = actions.move_selection_previous, -- move to prev result
-            ["<C-j>"] = actions.move_selection_next, -- move to next result
+            ["<C-j>"] = actions.move_selection_next,     -- move to next result
             ["<C-l>"] = actions.smart_send_to_qflist + actions.open_qflist,
           },
         },
@@ -90,7 +90,7 @@ return {
 
     keymap.set("n", "<leader>fe", "<cmd>Telescope emoji<cr>", { desc = "Find emoji" })
     keymap.set("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Select from register" })
-    keymap.set("n", "<leader>gw", custom_plugins.git_branch_picker, { desc = "Git branch picker" })
+    keymap.set("n", "<leader>gsw", custom_plugins.git_branch_picker, { desc = "Git branch picker" })
     keymap.set("n", "<leader>gr", custom_plugins.git_branch_picker_with_stash,
       { desc = "Git branch picker (stash-switch-pop)" })
   end,

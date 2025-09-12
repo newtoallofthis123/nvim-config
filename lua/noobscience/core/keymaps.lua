@@ -89,6 +89,11 @@ vim.api.nvim_set_keymap('n', '<leader>bp', ':bp<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>s', ':set spell spelllang=en<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>gS', ':set nospell<CR>', { noremap = true })
 
+vim.keymap.set('n', '<leader>gl', '<cmd>Git pull<cr>', { desc = 'Git pull' })
+vim.keymap.set('n', '<leader>gp', '<cmd>Git push<cr>', { desc = 'Git push' })
+vim.keymap.set('n', '<leader>gsta', '<cmd>Git stash<cr>', { desc = 'Git stash' })
+vim.keymap.set('n', '<leader>gstp', '<cmd>Git stash pop<cr>', { desc = 'Git stash pop' })
+
 vim.keymap.set('n', '<leader>w<Left>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<leader>w<Right>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<leader>w<Down>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
