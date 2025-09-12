@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 
 -- local keymap = vim.keymap
 
-vim.keymap.set("n", "<leader>d", vim.cmd.bd, { desc = "Delete buffer" })
+vim.keymap.set("n", "<leader>d", function() vim.cmd("bd!") end, { desc = "Delete buffer" })
 -- vim.keymap.set("n", "<leader>d", function()
 -- 	if vim.fn.winnr('$') > 1 then
 -- 		vim.cmd('close')
@@ -10,7 +10,7 @@ vim.keymap.set("n", "<leader>d", vim.cmd.bd, { desc = "Delete buffer" })
 -- 		vim.cmd('bd!')
 -- 	end
 -- end, { desc = "Close split or delete buffer if last window" })
-vim.keymap.set("n", "<leader>q", function() vim.cmd('close') end)
+-- vim.keymap.set("n", "<leader>q", function() vim.cmd('close') end)
 vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<C-Tab>', ':bnext<CR>', { noremap = true })
@@ -31,7 +31,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "J", "mzJ`z")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set({"n", "v"}, "<leader>x", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>x", [["_d]])
 vim.keymap.set("n", "<leader>ra", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set('n', '<C-S>', vim.cmd.w)
@@ -40,8 +40,8 @@ vim.keymap.set('n', '<C-Q>', vim.cmd.qa)
 
 -- Quickly Change Color schemes
 vim.keymap.set('n', '<leader>li', function()
-    vim.opt.background = 'light'
-    vim.cmd('colorscheme PaperColor')
+  vim.opt.background = 'light'
+  vim.cmd('colorscheme PaperColor')
 end)
 vim.keymap.set('n', '<leader>lv', function() vim.opt.background = 'light' end)
 vim.keymap.set('n', '<leader>dv', function() vim.opt.background = 'dark' end)
@@ -58,24 +58,24 @@ vim.api.nvim_set_keymap('n', '<leader>gp', ':Git push', { noremap = true })
 
 vim.api.nvim_set_keymap('n', '<leader>gs', ':Git status<CR>', { noremap = true })
 vim.keymap.set('n', '<leader>gsc', function()
-    local branch_name = vim.fn.input('Branch name: ')
-    if branch_name ~= '' then
-        vim.cmd('Git switch -c ' .. branch_name)
-    end
+  local branch_name = vim.fn.input('Branch name: ')
+  if branch_name ~= '' then
+    vim.cmd('Git switch -c ' .. branch_name)
+  end
 end, { desc = 'Create and switch to new branch' })
 -- TODO: Fix
 vim.keymap.set('n', '<leader>gpr', function()
-    local reviewers = vim.fn.input('Reviewers (comma-separated): ')
-    if reviewers ~= '' then
-        local reviewer_args = ''
-        for reviewer in reviewers:gmatch('([^,]+)') do
-            reviewer = reviewer:match('^%s*(.-)%s*$') -- trim whitespace
-            if reviewer ~= '' then
-                reviewer_args = reviewer_args .. ' --reviewer ' .. reviewer
-            end
-        end
-        vim.cmd('!gh pr create' .. reviewer_args .. ' --fill-first --head')
+  local reviewers = vim.fn.input('Reviewers (comma-separated): ')
+  if reviewers ~= '' then
+    local reviewer_args = ''
+    for reviewer in reviewers:gmatch('([^,]+)') do
+      reviewer = reviewer:match('^%s*(.-)%s*$') -- trim whitespace
+      if reviewer ~= '' then
+        reviewer_args = reviewer_args .. ' --reviewer ' .. reviewer
+      end
     end
+    vim.cmd('!gh pr create' .. reviewer_args .. ' --fill-first --head')
+  end
 end, { desc = 'Create PR with reviewers' })
 
 -- Some formatting keymaps
@@ -102,29 +102,50 @@ vim.keymap.set('n', '<C-t>h', ':tabprevious<CR>', { desc = 'Move to the previous
 vim.keymap.set('n', '<C-t><C-t>', ':tabnew<CR>', { desc = 'Create a new tab' })
 
 local new_t = function()
-    vim.cmd('tabnew')
-    vim.cmd('term')
+  vim.cmd('tabnew')
+  vim.cmd('term')
 end
 
-local h_t = function ()
-    vim.cmd('split')
-    vim.cmd('wincmd r')
-    vim.cmd('wincmd h')
-    vim.cmd('wincmd 6-')
-    vim.cmd('term')
+local h_t = function()
+  vim.cmd('split')
+  vim.cmd('wincmd r')
+  vim.cmd('wincmd h')
+  vim.cmd('wincmd 6-')
+  vim.cmd('term')
 end
 
-vim.keymap.set('n', '<C-t>t', new_t, { desc = 'Open a new terminal tab' })
-vim.keymap.set('n', '<C-t>h', h_t, { desc = 'Open a terminal in a horizontal split' })
+vim.keymap.set('n', '<leader>tn', new_t, { desc = 'Open a new terminal tab' })
+vim.keymap.set('n', '<leader>th', h_t, { desc = 'Open a terminal in a horizontal split' })
 
-vim.keymap.set('n', '<leader>st', ':term<CR>', { desc = 'Open a terminal' })
+-- Navigate to specific tabs with Ctrl+number
+vim.keymap.set('n', '<leader>t1', '1gt', { desc = 'Go to tab 1' })
+vim.keymap.set('n', '<leader>t2', '2gt', { desc = 'Go to tab 2' })
+vim.keymap.set('n', '<leader>t3', '3gt', { desc = 'Go to tab 3' })
+vim.keymap.set('n', 'leader>t4', '4gt', { desc = 'Go to tab 4' })
+vim.keymap.set('n', 'leader>t5', '5gt', { desc = 'Go to tab 5' })
+vim.keymap.set('n', 'leader>t6', '6gt', { desc = 'Go to tab 6' })
+vim.keymap.set('n', 'leader>t7', '7gt', { desc = 'Go to tab 7' })
+vim.keymap.set('n', 'leader>t8', '8gt', { desc = 'Go to tab 8' })
+vim.keymap.set('n', 'leader>t9', '9gt', { desc = 'Go to tab 9' })
+
+vim.api.nvim_set_keymap("n", "<leader>ta", ":$tabnew<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>tc", ":tabclose<CR>", { noremap = true })
+-- move current tab to previous position
+vim.api.nvim_set_keymap("n", "<leader>tmp", ":-tabmove<CR>", { noremap = true })
+-- move current tab to next position
+vim.api.nvim_set_keymap("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true })
 
 vim.keymap.set('n', '<leader>go', ':!qit o<CR>', { desc = 'Open Git Repo in the browser' })
 
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>zz', { desc = 'Open the quick list buffer' })
 vim.keymap.set('n', '<A-k>', '<cmd>cprev<CR>zz', { desc = 'Next item in quickfix list' })
 
+vim.keymap.set('n', '<leader>Qn', '<cmd>cnext<CR>zz', { desc = 'Next Item in the quickfix list' })
+vim.keymap.set('n', '<leader>Qp', '<cmd>cprev<CR>zz', { desc = 'Previous Item in the quickfix list' })
+
 vim.keymap.set('n', '<leader>rf', ':!zellij run -f', { desc = 'Run in Zellij Floating window' })
 vim.keymap.set('n', '<leader>t', ':Ex<CR>', { desc = 'Open Netrw' })
 vim.keymap.set('n', '<leader>cce', ':Copilot enable<CR>', { desc = 'Enable Copilot' })
 vim.keymap.set('n', '<leader>ccw', ':Copilot disable<CR>', { desc = 'Disable Copilot' })
+
+vim.keymap.set('n', '<leader>tb', ':tab split<CR>', { desc = 'Open current buffer in new tab' })

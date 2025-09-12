@@ -7,15 +7,15 @@ return {
     local elixirls = require("elixir.elixirls")
 
     elixir.setup {
-      nextls = {enable = false},
+      nextls = { enable = false },
       elixirls = {
         enable = true,
 
-          repo = "elixir-lsp/elixir-ls", -- defaults to elixir-lsp/elixir-ls
-          branch = "master", -- defaults to nil, just checkouts out the default branch, mutually exclusive with the `tag` option
+        repo = "elixir-lsp/elixir-ls",   -- defaults to elixir-lsp/elixir-ls
+        branch = "master",               -- defaults to nil, just checkouts out the default branch, mutually exclusive with the `tag` option
 
 
-          settings = elixirls.settings {
+        settings = elixirls.settings {
           dialyzerEnabled = true,
           fetchDeps = false,
           enableTestLenses = false,

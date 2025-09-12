@@ -34,20 +34,20 @@ vim.cmd("set wildmenu")
 vim.cmd("set wildignore+=**/.git/**")
 
 vim.filetype.add({
-    pattern = {
-        ['.*%.blade%.php'] = 'blade',
-    },
+  pattern = {
+    ['.*%.blade%.php'] = 'blade',
+  },
 })
 
 vim.cmd([[colorscheme retrobox]])
 
 vim.api.nvim_create_user_command("E", function(opts)
-    local path = vim.fn.expand(opts.args)
-    local dir = vim.fn.fnamemodify(path, ":h")
-    if vim.fn.isdirectory(dir) == 0 then
-        vim.fn.mkdir(dir, "p")
-    end
-    vim.cmd("edit " .. path)
+  local path = vim.fn.expand(opts.args)
+  local dir = vim.fn.fnamemodify(path, ":h")
+  if vim.fn.isdirectory(dir) == 0 then
+    vim.fn.mkdir(dir, "p")
+  end
+  vim.cmd("edit " .. path)
 end, { nargs = 1, complete = "file" })
 
 -- For dark mode by default
