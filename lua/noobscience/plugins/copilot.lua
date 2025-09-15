@@ -17,5 +17,5 @@ return { {
 
         -- vim.cmd([[Copilot disable]])
     end,
-    -- enabled = false
+    enabled = false
 } }

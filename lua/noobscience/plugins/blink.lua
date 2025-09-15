@@ -1,4 +1,4 @@
-return { {
+return {
   'saghen/blink.cmp',
   dependencies = { 'rafamadriz/friendly-snippets', "fang2hou/blink-copilot" },
   version = 'v0.*',
@@ -12,8 +12,27 @@ return { {
       ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide', 'fallback' },
       ['<CR>'] = { 'accept', 'fallback' },
-      ['<Tab>'] = { 'snippet_forward', 'fallback' },
-      ['<S-Tab>'] = { 'snippet_backward', 'fallback' }
+      -- ['<Tab>'] = { 'snippet_forward', 'fallback' },
+      ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+      ['<Tab>'] = {
+        function(cmp)
+          if cmp.snippet_active() then
+            return cmp.accept()
+          else
+            return cmp.select_and_accept()
+          end
+        end,
+        function()
+          if vim.fn.pumvisible() == 1 then
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-y>', true, false, true), 'n', false)
+            return true
+          else
+            return false
+          end
+        end,
+        'snippet_forward',
+        'fallback',
+      },
     },
 
     completion = {
@@ -56,7 +75,16 @@ return { {
           winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder'
         }
       },
-      ghost_text = { enabled = true }
+      -- ghost_text = { enabled = true }
+    },
+    cmdline = {
+      completion = {
+        menu = {
+          draw = {
+            columns = { { 'kind_icon', gap = 1 }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
+          },
+        },
+      },
     },
 
     appearance = {
@@ -134,7 +162,7 @@ return { {
           opts = {
             get_bufnrs = function()
               return vim.tbl_filter(function(buf)
-                return vim.api.nvim_buf_is_loaded(buf) and vim.api.nvim_buf_get_option(buf, 'buflisted')
+                return vim.api.nvim_buf_is_loaded(buf)
               end, vim.api.nvim_list_bufs())
             end
           }
@@ -166,6 +194,5 @@ return { {
       sorts = { 'score', 'sort_text' }
     }
   },
-  opts_extend = { "sources.default" }
-},
+  opts_extend = { 'sources.completion.enabled_providers' },
 }
