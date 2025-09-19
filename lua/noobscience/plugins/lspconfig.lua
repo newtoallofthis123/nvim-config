@@ -6,7 +6,6 @@ return {
     "saghen/blink.cmp",
   },
   config = function()
-    local lspconfig = require("lspconfig")
     local capabilities = require("blink.cmp").get_lsp_capabilities()
     capabilities.general = capabilities.general or {}
     capabilities.general.positionEncodings = { 'utf-16' }
@@ -57,7 +56,7 @@ return {
       vim.lsp.buf.format({ async = true })
     end, opts)
 
-    lspconfig.lua_ls.setup({
+    vim.lsp.config.lua_ls = {
       capabilities = capabilities,
       settings = {
         Lua = {
@@ -73,9 +72,9 @@ return {
           },
         },
       },
-    })
+    }
 
-    lspconfig.pyright.setup({
+    vim.lsp.config.pyright = {
       capabilities = capabilities,
       settings = {
         python = {
@@ -86,23 +85,22 @@ return {
           },
         },
       },
-    })
+    }
 
-
-    lspconfig.ts_ls.setup({
+    vim.lsp.config.ts_ls = {
       capabilities = capabilities,
       init_options = {
         preferences = {
           disableSuggestions = false,
         },
       },
-    })
+    }
 
-    lspconfig.emmet_ls.setup({
+    vim.lsp.config.emmet_ls = {
       capabilities = capabilities,
-    })
+    }
 
-    lspconfig.rust_analyzer.setup({
+    vim.lsp.config.rust_analyzer = {
       capabilities = capabilities,
       settings = {
         ["rust-analyzer"] = {
@@ -114,7 +112,7 @@ return {
           },
         },
       },
-    })
+    }
 
     vim.diagnostic.config({
       virtual_text = true,
