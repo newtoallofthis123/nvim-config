@@ -150,5 +150,3 @@ vim.keymap.set('n', '<leader>rf', ':!zellij run -f', { desc = 'Run in Zellij Flo
 vim.keymap.set('n', '<leader>t', ':Ex<CR>', { desc = 'Open Netrw' })
 vim.keymap.set('n', '<leader>cce', ':Copilot enable<CR>', { desc = 'Enable Copilot' })
 vim.keymap.set('n', '<leader>ccw', ':Copilot disable<CR>', { desc = 'Disable Copilot' })
-
-vim.keymap.set('n', '<leader>tb', ':tab split<CR>', { desc = 'Open current buffer in new tab' })
