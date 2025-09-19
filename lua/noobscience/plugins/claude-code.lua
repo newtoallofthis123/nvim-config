@@ -1,7 +1,7 @@
 return {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
-  cmd="ClaudeCode",
+  cmd = "ClaudeCode",
   config = function()
     require("claudecode").setup({
       terminal = {
@@ -9,33 +9,41 @@ return {
         provider = "snacks",
         snacks_win_opts = {
           keys = {
-            claude_toggle = {
+            term_normal = {
+              "<esc>",
+              function(self)
+                local mode = vim.fn.mode()
+                if mode == "t" then
+                  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-\\><C-n>", true, false, true), "n", false)
+                  self.double_esc_timer = self.double_esc_timer or vim.loop.new_timer()
+                  if self.double_esc_timer then
+                    self.double_esc_timer:start(200, 0, function()
+                      self.double_esc_timer = nil
+                    end)
+                  end
+                end
+              end,
+              mode = "t",
+              expr = true,
+              desc = "Double escape to normal mode"
+            },
+            claude_switch_buffer = {
               "<C-/>",
               function(self)
-                vim.cmd("wincmd l")
+                vim.cmd("wincmd p")
               end,
               mode = "t",
-              desc = "Go to Left",
-            },
-            claude_hide = {
-              "<C-,>",
-              function(self)
-                self:hide()
-                -- vim.cmd("wincmd l")
-              end,
-              mode = "t",
-              desc = "hide",
-            },
-          },
-        },
+              desc = "Switch to previous buffer"
+            }
+          }
+        }
       }
     })
   end,
   keys = {
-    { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
-    { "<leader>as", "<cmd>ClaudeCodeFocus<cr>",       desc = "Toggle Claude" },
-    { "<C-/>",      "<cmd>ClaudeCodeFocus<cr>",       desc = "Claude Code",        mode = { "n", "x" } },
-    { "<C-,>",      "<cmd>ClaudeCode<cr>",            desc = "Claude Code",        mode = { "n", "x" } },
+    { "<leader>ac", "<cmd>ClaudeCodeFocus<cr>",       desc = "Toggle Claude",      mode = { "n", "t" } },
+    { "<C-/>",      "<cmd>ClaudeCodeFocus<cr>",       desc = "Claude Code",        mode = { "n", "t" } },
+    { "<C-,>",      "<cmd>ClaudeCode<cr>",            desc = "Claude Code",        mode = { "n", "t" } },
     { "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
     { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
     { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },

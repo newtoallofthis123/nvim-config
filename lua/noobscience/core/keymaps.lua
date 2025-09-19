@@ -100,10 +100,8 @@ vim.keymap.set('n', '<leader>w<Down>', '<C-w><C-j>', { desc = 'Move focus to the
 vim.keymap.set('n', '<leader>w<Up>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 -- vim.keymap.set('n', '<leader>vs', '<C-w>v', { desc = 'Split window vertically' })
 -- vim.keymap.set('n', '<leader>hs', '<C-w>s', { desc = 'Split window horizontally' })
-vim.keymap.set('n', '<C-t><Right>', ':tabNext<CR>', { desc = 'Move to the next tab' })
-vim.keymap.set('n', '<C-t><Left>', ':tabprevious<CR>', { desc = 'Move to the previous tab' })
-vim.keymap.set('n', '<C-t>l', ':tabNext<CR>', { desc = 'Move to the next tab' })
-vim.keymap.set('n', '<C-t>h', ':tabprevious<CR>', { desc = 'Move to the previous tab' })
+vim.keymap.set('n', 't<Right>', ':tabNext<CR>', { desc = 'Move to the next tab' })
+vim.keymap.set('n', 't<Left>', ':tabprevious<CR>', { desc = 'Move to the previous tab' })
 vim.keymap.set('n', '<C-t><C-t>', ':tabnew<CR>', { desc = 'Create a new tab' })
 
 local new_t = function()
