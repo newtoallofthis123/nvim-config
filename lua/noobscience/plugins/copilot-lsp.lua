@@ -27,5 +27,7 @@ return {
         return nil
       end, { desc = 'Restore previous Copilot suggestion', expr = true })
     end)
-  end
+  end,
+
+  enabled = false
 }

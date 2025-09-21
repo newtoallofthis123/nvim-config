@@ -57,20 +57,20 @@ return {
 
 
     -- Rosepine
-    local colors = {
-      bg       = nil,             -- White for background
-      fg       = '#e0def4',       -- Dark gray for foreground (default text)
-      yellow   = '#f6c177',       -- Bright yellow
-      cyan     = '#ebbcba',       -- Cyan-blue
-      darkblue = '#9ccfd8',       -- Deep blue
-      green    = '#31748f',       -- Green (used for success)
-      orange   = '#f6c177',       -- Vibrant orange
-      violet   = '#c4a7e7',       -- Purple-violet
-      magenta  = '#c4a7e7',       -- Light magenta-pink
-      blue     = '#9ccfd8',       -- Standard blue
-      red      = '#eb6f92',       -- Bright red (used for errors)
-      black    = '#191724'
-    }
+    -- local colors = {
+    --   bg       = nil,             -- White for background
+    --   fg       = '#e0def4',       -- Dark gray for foreground (default text)
+    --   yellow   = '#f6c177',       -- Bright yellow
+    --   cyan     = '#ebbcba',       -- Cyan-blue
+    --   darkblue = '#9ccfd8',       -- Deep blue
+    --   green    = '#31748f',       -- Green (used for success)
+    --   orange   = '#f6c177',       -- Vibrant orange
+    --   violet   = '#c4a7e7',       -- Purple-violet
+    --   magenta  = '#c4a7e7',       -- Light magenta-pink
+    --   blue     = '#9ccfd8',       -- Standard blue
+    --   red      = '#eb6f92',       -- Bright red (used for errors)
+    --   black    = '#191724'
+    -- }
 
     -- Rosepine dawn
     -- local colors = {
@@ -88,19 +88,19 @@ return {
     -- }
 
     -- Monokai
-    -- local colors = {
-    --     bg       = nil,       -- Background (soft dark background, typically transparent)
-    --     fg       = '#e0def4', -- Soft, off-white for the foreground text
-    --     yellow   = '#F0DA61', -- Warm amber yellow
-    --     cyan     = '#59D3E6', -- Muted cyan
-    --     darkblue = '#31748f', -- Deep teal blue
-    --     green    = '#77D18A', -- Gentle sage green
-    --     orange   = '#FA9151', -- Muted peachy orange
-    --     violet   = '#9389E3', -- Subtle lavender violet
-    --     blue     = '#3e8fb0', -- Muted sky blue
-    --     red      = '#FC608C', -- Rose red
-    --     black    = '#1a1a1a',
-    -- }
+    local colors = {
+        bg       = nil,       -- Background (soft dark background, typically transparent)
+        fg       = '#e0def4', -- Soft, off-white for the foreground text
+        yellow   = '#F0DA61', -- Warm amber yellow
+        cyan     = '#59D3E6', -- Muted cyan
+        darkblue = '#31748f', -- Deep teal blue
+        green    = '#77D18A', -- Gentle sage green
+        orange   = '#FA9151', -- Muted peachy orange
+        violet   = '#9389E3', -- Subtle lavender violet
+        blue     = '#3e8fb0', -- Muted sky blue
+        red      = '#FC608C', -- Rose red
+        black    = '#1a1a1a',
+    }
 
     -- local colors = {
     --     bg       = '#1a1b26', -- Deep dark blue (Tokyo Night background)

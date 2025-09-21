@@ -128,5 +128,8 @@ return {
       update_in_insert = false,
       severity_sort = false,
     })
+
+    -- Enable all configured LSP servers
+    vim.lsp.enable({ 'lua_ls', 'pyright', 'ts_ls', 'emmet_ls', 'rust_analyzer' })
   end,
 }
