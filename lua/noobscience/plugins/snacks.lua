@@ -44,12 +44,12 @@ return {
         header = [[
 
 
-    _   __            __   _      
+    _   __            __   _
    / | / /___  ____  / /_ ( )_____
   /  |/ / __ \/ __ \/ __ \|// ___/
- / /|  / /_/ / /_/ / /_/ / (__  ) 
-/_/ |_/\____/\____/_.___/ /____/  
-                                  
+ / /|  / /_/ / /_/ / /_/ / (__  )
+/_/ |_/\____/\____/_.___/ /____/
+
         ]],
       },
       sections = {
@@ -70,12 +70,35 @@ return {
     -- indent = {},
     -- scroll = {},
     image = {},
+    indent = {
+      enabled = false,
+      char = "i",
+      only_scope = true,
+      only_current = true,
+      chunk = {
+        enabled = true,
+        only_current = false,
+        priority = 200,
+        hl = "SnacksIndentChunk",
+        char = {
+          corner_top = "┌",
+          corner_bottom = "└",
+          horizontal = "─",
+          vertical = "│",
+          arrow = ">",
+        },
+      },
+    },
     explorer = {},
     lazygit = {},
     quickfile = {
       enabled = false,
     },
-    terminal = {},
+    terminal = {
+      win = {
+        style = "terminal",
+      },
+    },
     statuscolumn = {},
   },
   keys = {
@@ -113,8 +136,27 @@ return {
     {
       "<C-w>t",
       function()
-        Snacks.terminal.toggle("zsh")
+        Snacks.terminal.toggle("zsh", {
+          win = {
+            position = "bottom",
+            height = 0.3,
+          }
+        })
       end,
+      desc = "Toggle Horizontal Terminal",
+    },
+    {
+      "<C-w>/",
+      function()
+        Snacks.terminal.toggle("zsh", {
+          win = {
+            position = "float",
+          },
+          auto_insert = true
+        })
+      end,
+      desc = "Toggle Floating Terminal",
+      mode = { "n", "t" },
     },
     {
       "<leader>gw",

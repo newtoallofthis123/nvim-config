@@ -25,16 +25,6 @@ return {
       matcher = {
         frecency = true,
       },
-      -- win = {
-      --   input = {
-      --     keys = {
-      --       ["<c-t>"] = {
-      --         "trouble_open",
-      --         mode = { "n", "i" },
-      --       },
-      --     },
-      --   },
-      -- },
 
       keys = {
         i = {
@@ -50,6 +40,13 @@ return {
           follow = true,
         },
         grep = {
+        },
+        explorer = {
+          layout = {
+            layout = {
+              position = "right",
+            },
+          },
         },
       },
     },
@@ -115,18 +112,18 @@ return {
 
     -- Lsp
 
-    { "<leader>fg", function() Snacks.picker.git_files() end,             desc = "Find Git Files" },
-    { "<leader>fl", function() Snacks.picker.smart() end,                 desc = "Smart Search" },
-    { "gd",         function() Snacks.picker.lsp_definitions() end,       desc = "Goto Definition" },
-    { "<leader>D",         function() Snacks.picker.diagnostics_buffer() end,    desc = "Buffer Diagnostics" },
-    { "<leader>W",  function() Snacks.picker.diagnostics() end,           desc = "Workspace Diagnostics" },
-    { "<leader>gI", function() Snacks.picker.lsp_implementations() end,   desc = "Goto Implementation" },
-    { "<leader>gy", function() Snacks.picker.lsp_type_definitions() end,  desc = "Goto T[y]pe Definition" },
-    { "<leader>o",  function() Snacks.picker.lsp_symbols() end,           desc = "LSP Symbols" },
-    { "<leader>O",  function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
+    { "<leader>fg", function() Snacks.picker.git_files() end,                                                    desc = "Find Git Files" },
+    { "<leader>fl", function() Snacks.picker.smart() end,                                                        desc = "Smart Search" },
+    { "gd",         function() Snacks.picker.lsp_definitions() end,                                              desc = "Goto Definition" },
+    { "<leader>D",  function() Snacks.picker.diagnostics_buffer() end,                                           desc = "Buffer Diagnostics" },
+    { "<leader>W",  function() Snacks.picker.diagnostics() end,                                                  desc = "Workspace Diagnostics" },
+    { "<leader>gI", function() Snacks.picker.lsp_implementations() end,                                          desc = "Goto Implementation" },
+    { "<leader>gy", function() Snacks.picker.lsp_type_definitions() end,                                         desc = "Goto T[y]pe Definition" },
+    { "<leader>o",  function() Snacks.picker.lsp_symbols() end,                                                  desc = "LSP Symbols" },
+    { "<leader>O",  function() Snacks.picker.lsp_workspace_symbols() end,                                        desc = "LSP Workspace Symbols" },
 
     -- Explorer
-    { "<leader>E",  function() Snacks.picker.explorer() end,              desc = "Picker Explorer" },
+    { "<leader>E",  function() Snacks.picker.explorer({ layout = { preset = "sidebar", preview = false } }) end, desc = "Picker Explorer" },
   },
 
   config = function()

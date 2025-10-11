@@ -13,7 +13,7 @@ return {
         number = true,
         relativenumber = false,
         cursorline = true,
-        signcolumn = true,
+        signcolumn = false,
         winhighlight = false,
       },
     })
@@ -28,9 +28,6 @@ return {
     focusmap("j")
     focusmap("k")
     focusmap("l")
-
-    -- vim.keymap.set("n", "<leader>w=", "<cmd>FocusEqualise<cr>", { desc = "Equalize all splits" })
-    -- vim.keymap.set("n", "<leader>wm", "<cmd>FocusMaxOrEqual<cr>", { desc = "Toggle maximize/equalize split" })
 
     vim.keymap.set("n", "<leader>wo", "<cmd>FocusSplitCycle<cr>", { desc = "Cycle through splits" })
 

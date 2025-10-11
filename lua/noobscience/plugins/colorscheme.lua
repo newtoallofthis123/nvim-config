@@ -34,7 +34,7 @@ return {
       require("gruvbox").setup({
         bold = false,
         italic = {
-          strings = false,
+          strings = true,
           emphasis = true,
           comments = true,
           operators = false,

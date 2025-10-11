@@ -7,9 +7,9 @@ return {
       fill = 'TabLineFill',
       head = { fg = '#e0def4', bg = '#1a1a1a' },
       current_tab = { fg = '#1a1a1a', bg = '#31748f' },
-      tab = { fg = '#e0def4', bg = '#1a1a1a' },
-      win = { fg = '#1a1a1a', bg = '#8aadf4' },
-      tail = { fg = '#e0def4', bg = '#1a1a1a' },
+      tab = { fg = '#e0def4', bg = '#1a1a1a', style = 'italic' },
+      win = { fg = '#1a1a1a', bg = '#8aadf4', style = 'italic' },
+      tail = { fg = '#e0def4', bg = '#1a1a1a', style = 'italic' },
     }
 
     require('tabby.tabline').set(function(line)

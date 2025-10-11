@@ -96,6 +96,10 @@ return {
       },
     }
 
+    vim.lsp.config.prettier = {
+      capabilities = capabilities
+    }
+
     vim.lsp.config.emmet_ls = {
       capabilities = capabilities,
     }
@@ -114,6 +118,16 @@ return {
       },
     }
 
+    vim.lsp.config('expert', {
+      cmd = { '/Users/noob/.bin/expert_darwin_amd64' },
+      root_markers = { 'mix.exs', '.git' },
+      filetypes = { 'elixir', 'eelixir', 'heex' },
+    })
+
+    vim.lsp.config.copilot_language_server = {
+      capabilities = capabilities
+    }
+
     vim.diagnostic.config({
       virtual_text = true,
       signs = {
@@ -130,6 +144,6 @@ return {
     })
 
     -- Enable all configured LSP servers
-    vim.lsp.enable({ 'lua_ls', 'pyright', 'ts_ls', 'emmet_ls', 'rust_analyzer' })
+    vim.lsp.enable({ 'lua_ls', 'pyright', 'ts_ls', 'emmet_ls', 'rust_analyzer', 'expert', 'copilot_language_server' })
   end,
 }

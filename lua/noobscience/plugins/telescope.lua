@@ -79,7 +79,7 @@ return {
       },
     })
 
-    telescope.load_extension("emoji")
+    -- telescope.load_extension("emoji")
     -- telescope.load_extension('fzf')
 
     -- Import custom telescope plugins

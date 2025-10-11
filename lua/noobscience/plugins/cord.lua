@@ -3,5 +3,5 @@ return {
   build = './build || .\\build',
   event = 'VeryLazy',
   opts = {}, -- calls require('cord').setup(),
-enabled = false
+  enabled = false
 }
