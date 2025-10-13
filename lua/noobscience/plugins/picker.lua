@@ -1,3 +1,86 @@
+-- Custom grammar parser for grep
+local function parse_grep_grammar(input)
+  local opts = {}
+  local search_pattern = input
+
+  -- Parse directives: exclude:, glob:, ft:, dir:, hidden:, ignored:
+  local directives = {
+    exclude = {},
+    glob = {},
+    dirs = {},
+  }
+
+  -- Extract exclude: patterns
+  search_pattern = search_pattern:gsub("exclude:([^%s]+)%s*", function(pattern)
+    table.insert(directives.exclude, pattern)
+    return ""
+  end)
+
+  -- Extract glob: patterns
+  search_pattern = search_pattern:gsub("glob:([^%s]+)%s*", function(pattern)
+    table.insert(directives.glob, pattern)
+    return ""
+  end)
+
+  -- Extract ft: (file type)
+  search_pattern = search_pattern:gsub("ft:([^%s]+)%s*", function(ft)
+    opts.ft = ft
+    return ""
+  end)
+
+  -- Extract dir: (directory)
+  search_pattern = search_pattern:gsub("dir:([^%s]+)%s*", function(dir)
+    table.insert(directives.dirs, dir)
+    return ""
+  end)
+
+  -- Extract hidden: flag
+  search_pattern = search_pattern:gsub("hidden:(%w+)%s*", function(value)
+    opts.hidden = (value == "true" or value == "1")
+    return ""
+  end)
+
+  -- Extract ignored: flag
+  search_pattern = search_pattern:gsub("ignored:(%w+)%s*", function(value)
+    opts.ignored = (value == "true" or value == "1")
+    return ""
+  end)
+
+  -- Set arrays if they have values
+  if #directives.exclude > 0 then
+    opts.exclude = directives.exclude
+  end
+  if #directives.glob > 0 then
+    opts.glob = directives.glob
+  end
+  if #directives.dirs > 0 then
+    opts.dirs = directives.dirs
+  end
+
+  -- Clean up extra whitespace
+  search_pattern = search_pattern:match("^%s*(.-)%s*$") or ""
+
+  return search_pattern, opts
+end
+
+-- Custom smart grep function
+local function smart_grep()
+  require("snacks").input({
+    prompt = "Smart Grep> ",
+    icon = "🔍",
+    icon_pos = "left",
+  }, function(search_input)
+    if not search_input or search_input == "" then
+      return
+    end
+
+    local pattern, opts = parse_grep_grammar(search_input)
+    opts.search = pattern
+
+    require("snacks").picker.grep(opts)
+  end)
+end
+
 return {
   "folke/snacks.nvim",
   opts = {
@@ -75,14 +158,17 @@ return {
       end,
       desc = "Find open buffers",
     },
-
-    -- Search operations
+    {
+      "<leader>fS",
+      smart_grep,
+      desc = "Smart grep with custom grammar",
+    },
     {
       "<leader>fs",
       function()
         Snacks.picker.grep()
       end,
-      desc = "Find string in cwd",
+      desc = "Find string in cwd (standard)",
     },
     {
       "<leader>fw",
