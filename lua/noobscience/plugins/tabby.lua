@@ -23,7 +23,7 @@ return {
           return {
             line.sep('', hl, theme.fill),
             tab.is_current() and '*' or '',
-            -- tab.number(),
+            tab.number(),
             tab.name(),
             tab.close_btn(''),
             line.sep('', hl, theme.fill),

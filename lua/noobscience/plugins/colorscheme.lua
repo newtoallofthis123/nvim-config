@@ -24,7 +24,7 @@ return {
           }
         end
       })
-      vim.cmd([[colorscheme monokai-pro-spectrum]])
+      -- vim.cmd([[colorscheme monokai-pro-spectrum]])
     end
   },
   {
@@ -40,7 +40,7 @@ return {
           operators = false,
           folds = false,
         },
-        contrast = "hard",         -- can be "hard", "soft" or empty string
+        contrast = "hard", -- can be "hard", "soft" or empty string
         palette_overrides = {},
         overrides = {
           WhichKey = { bg = "NONE" },
@@ -57,12 +57,30 @@ return {
     end
   },
   {
-    'projekt0n/github-nvim-theme',
-    -- priority = 1000,
-    -- config = function()
-    --   vim.cmd([[colorscheme github_light]])
-    -- end
+    'vague-theme/vague.nvim',
+    config = function()
+      require("vague").setup({
+        transparent = true,
+        bold = false,
+        italic = true,
+        on_highlights = function(hl, _c)
+            hl.Pmenu = { bg = "NONE" }
+            hl.PmenuThumb = { bg = "NONE" }
+        end
+      })
+
+      -- vim.cmd("colorscheme vague")
+    end
   },
+  {
+    'webhooked/kanso.nvim'
+  }, {
+  'projekt0n/github-nvim-theme',
+  -- priority = 1000,
+  -- config = function()
+  --   vim.cmd([[colorscheme github_light]])
+  -- end
+},
   {
     'sainnhe/gruvbox-material',
     -- priority = 1000,
@@ -141,7 +159,7 @@ return {
         --     TelescopeSelectionCaret = { fg = "rose", bg = "rose" },
         -- },
       })
-      -- vim.cmd([[colorscheme rose-pine]])
+      vim.cmd([[colorscheme rose-pine]])
     end
   },
   {
@@ -199,9 +217,9 @@ return {
   {
     "jackplus-xyz/binary.nvim",
     opts = {
-      colors = {                -- Colors used for the "light" theme; reversed automatically for "dark"
-        bg = "#d79921",         -- Foreground color
-        fg = "#000000",         -- Background color
+      colors = {        -- Colors used for the "light" theme; reversed automatically for "dark"
+        bg = "#d79921", -- Foreground color
+        fg = "#000000", -- Background color
       },
     }
   },
