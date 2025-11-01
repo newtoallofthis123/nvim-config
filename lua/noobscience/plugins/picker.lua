@@ -85,6 +85,51 @@ return {
   "folke/snacks.nvim",
   opts = {
     picker = {
+      actions = {
+        set_glob_pattern = function(picker)
+          require('snacks').input({
+            prompt = 'Glob pattern: ',
+          }, function(pattern)
+            if pattern and pattern ~= '' then
+              picker.opts.args = picker.opts.args or {}
+              table.insert(picker.opts.args, '--glob=' .. pattern)
+              picker:find()
+            end
+          end)
+        end,
+        search_in_directory = {
+          action = function(_, item)
+            if not item then
+              return
+            end
+            local dir = vim.fn.fnamemodify(item.file, ':p:h')
+            require('snacks').picker.grep {
+              cwd = dir,
+              cmd = 'rg',
+              args = {},
+              show_empty = true,
+              hidden = true,
+              ignored = true,
+              follow = false,
+              supports_live = true,
+            }
+          end,
+        },
+        search_files_in_directory = {
+          action = function(_, item)
+            if not item then
+              return
+            end
+            local dir = vim.fn.fnamemodify(item.file, ':p:h')
+            require('snacks').picker.files {
+              cwd = dir,
+              hidden = true,
+              ignored = true,
+              follow = false,
+            }
+          end,
+        },
+      },
       -- actions = require("trouble.sources.snacks").actions,
       layout = {
         layout = {
@@ -108,12 +153,41 @@ return {
       matcher = {
         frecency = true,
       },
-
       keys = {
         i = {
           ["<C-k>"] = "move_up",
           ["<C-j>"] = "move_down",
           ["<C-l>"] = "select_and_accept",
+        },
+      },
+
+      win = {
+        input = {
+          keys = {
+            ['<S-k>'] = { 'history_back', mode = { 'n' } },
+            ['<S-j>'] = { 'history_forward', mode = { 'n' } },
+            ['t'] = { 'tab' },
+            ['f'] = {
+              'set_glob_pattern',
+              mode = { 'n' },
+              desc = 'Set glob pattern',
+            },
+            ['v'] = { 'edit_vsplit' },
+          }
+        }
+      },
+
+      list = {
+        keys = {
+          ['t'] = { 'tab' },
+          ['v'] = { 'edit_vsplit' },
+          ['f'] = {
+            'set_glob_pattern',
+            mode = { 'n' },
+            desc = 'Set glob pattern',
+          },
+          ['s'] = { 'search_in_directory', desc = 'Search in directory' },
+          ['S'] = { 'search_files_in_directory', desc = 'Search files in directory' },
         },
       },
 

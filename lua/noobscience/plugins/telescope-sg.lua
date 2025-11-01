@@ -1,0 +1,3 @@
+return {
+  "Marskey/telescope-sg",
+}

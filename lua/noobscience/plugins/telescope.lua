@@ -4,6 +4,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-tree/nvim-web-devicons",
+    "Marskey/telescope-sg"
   },
   config = function()
     local telescope = require("telescope")
@@ -34,6 +35,14 @@ return {
           override_file_sorter = true,
           case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         },
+        ast_grep = {
+          command = {
+            "sg",
+            "--json=stream",
+          },
+          -- grep_open_files = false,   -- search in opened files
+          -- lang = nil,                -- string value, specify language for ast-grep `nil` for default
+        }
       },
       defaults = {
         path_display = { "truncate " },
@@ -90,6 +99,7 @@ return {
 
     keymap.set("n", "<leader>fe", "<cmd>Telescope emoji<cr>", { desc = "Find emoji" })
     keymap.set("n", "<leader>fr", "<cmd>Telescope registers<cr>", { desc = "Select from register" })
+    keymap.set("n", "<leader>fa", "<cmd>Telescope ast_grep<cr>", { desc = "Telescope Ast grep" })
     keymap.set("n", "<leader>gsw", custom_plugins.git_branch_picker, { desc = "Git branch picker" })
     keymap.set("n", "<leader>gr", custom_plugins.git_branch_picker_with_stash,
       { desc = "Git branch picker (stash-switch-pop)" })

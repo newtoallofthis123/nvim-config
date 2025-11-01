@@ -32,10 +32,26 @@ vim.cmd("set nocompatible")
 vim.cmd("set path+=**")
 vim.cmd("set wildmenu")
 vim.cmd("set wildignore+=**/.git/**")
+vim.o.tabclose = 'uselast'
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.list = true
+vim.opt.showbreak = '↪ '
+vim.opt.foldnestmax = 20
+vim.opt.foldminlines = 2
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+vim.o.foldenable = true
+vim.o.foldcolumn = '0'
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.expand("~/.undodir")
 
 vim.filetype.add({
   pattern = {
     ['.*%.blade%.php'] = 'blade',
+    ['.*%.mdx'] = 'markdown',
   },
 })
 
